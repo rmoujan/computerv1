@@ -1,0 +1,16 @@
+you should calcul delta
+delta > 0 ---> give us two solutions
+delta == 0 --->give us one solution
+delta < 0 --->does not have solution
+
+**DEfinition :
+A polynomial is an expression consisting of variables (also called indeterminates),
+coefficients, and exponents that are non-negative integers. 
+**General Form of a polynomial:
+P(x) = ax^(n) + bx^(n-1) + cx^(n - 2) ... 
+
+** constraintes :
+1- Write a program that solves a polynomial second or lower degree equation.
+2- Every term respect the form (a ∗ x^p)
+3-  I dont get very well this : (You should also think of zero, negative or non whole coefficients)
+==>means mo3amil y9de yekon zero wela negative number wela 3adad ghayr sa7i7 (b7al kosor , jodor, 3adad 3ashari)
