@@ -59,42 +59,20 @@ void ft_output()
 
 void split_by_equal(string str)
 {
-    vector<string> data;
-    vector<string> leftTokens;
-    vector<string> rightTokens;
-    
+
+    vector<string> tokens;
     string token;
-    string leftToken;
-    string rightToken;
     map<string, float> equation;
     
-    std::istringstream ss(str);
-    while (std::getline(ss, token, '=')) {
-        cout<<"|"<<token<<"|"<<endl;
-        data.push_back(token);
-    }
-    std::cout << "Size of the vector: " << data.size() << std::endl;
-    if (data.size() == 2)
-    {
-        //process first string
-        cout <<"----------------- First String ------------|"<<data[0]<<endl;
-        std::istringstream tt(data[0]);
-        while (tt >> leftToken) {
-            cout<<"|"<<leftToken<<"|"<<endl;
-            leftTokens.push_back(leftToken);
+        std::istringstream tt(str);
+        while (tt >> token) {
+            cout<<"|"<<token<<"|"<<endl;
+            tokens.push_back(token);
         }
-        //fill the map :
-        
-        //process second string :
-        cout <<"----------------- Second String ------------|"<<data[1]<<endl;
-        std::istringstream ff(data[1]);
-        while (ff >> rightToken) {
-            cout<<"|"<<rightToken<<"|"<<endl;
-            rightTokens.push_back(rightToken);
-        }
-        // cout<<"|"<<data[0]<<"|"<<endl;
-        // cout<<"|"<<data[1]<<"|";
-    }
+    std::cout << "Size of the vector: " << tokens.size() << std::endl;
+
+    
+
 }
 
 int main(int argc, char *argv[])
@@ -103,9 +81,6 @@ int main(int argc, char *argv[])
     if (argc == 1)
         ft_error(-1);
     split_by_equal(argv[1]);
-    // create_reduced_form(argv[1]);
-    // cout <<argv[1]<<endl;
-    //you need to check the term entered (they said that every enteris always right)
-    //so we should make the reduced form:
+
     return 0;
 }
