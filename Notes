@@ -14,3 +14,7 @@ P(x) = ax^(n) + bx^(n-1) + cx^(n - 2) ...
 2- Every term respect the form (a ∗ x^p)
 3-  I dont get very well this : (You should also think of zero, negative or non whole coefficients)
 ==>means mo3amil y9de yekon zero wela negative number wela 3adad ghayr sa7i7 (b7al kosor , jodor, 3adad 3ashari)
+
+
+
+// the expected format : "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0"

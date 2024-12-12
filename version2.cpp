@@ -74,13 +74,37 @@ void split_by_equal(string str)
     
 
 }
-
+//valid chars are: numbers / - + * =  ^ . space / X / 
+int check_valid_char(string str)
+{
+    int i = 0;
+    cout <<"Tets check valid char"<<endl;
+    while(str[i])
+    {
+        if ( !((str[i]>= '0' && str[i] <= '9') || str[i] == '+' 
+                || str[i] == '-' ||  str[i] == '=' 
+                    || str[i] =='*' || str[i]== '^' 
+                        || str[i] == 'X' || str[i] == ' ' || str[i] == '.') )
+                    {
+                        cout <<"|Inside check valid "<<str[i]<<"|"<<endl;
+                        return (0);
+                    }
+        i++;
+    }
+    cout <<"after while"<<endl;
+    return (1);
+}
 int main(int argc, char *argv[])
 {
     cout <<"argc is "<<argc<<endl;
+    cout <<"argv is "<<argv[1]<<endl;
     if (argc == 1)
         ft_error(-1);
-    split_by_equal(argv[1]);
+    check_valid_char(argv[1]);
+    //split_by_equal(argv[1]);
 
+
+    // double a =(double)(4.9);
+    // cout<<"value of a is "<<(double)a<<endl;
     return 0;
 }
