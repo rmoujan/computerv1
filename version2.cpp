@@ -11,6 +11,10 @@ void ft_error(int code)
     {
         cout <<"Please enter an argument"<<endl;
     }
+    if (code == -2)
+    {
+        cout <<"Error : Unexpected Format !!!"<<endl;
+    }
         exit(0);
 }
 void ft_output()
@@ -70,10 +74,8 @@ void split_by_equal(string str)
             tokens.push_back(token);
         }
     std::cout << "Size of the vector: " << tokens.size() << std::endl;
-
-    
-
 }
+
 //valid chars are: numbers / - + * =  ^ . space / X / 
 int check_valid_char(string str)
 {
@@ -87,7 +89,7 @@ int check_valid_char(string str)
                         || str[i] == 'X' || str[i] == ' ' || str[i] == '.') )
                     {
                         cout <<"|Inside check valid "<<str[i]<<"|"<<endl;
-                        return (0);
+                        ft_error(-2);
                     }
         i++;
     }
@@ -101,7 +103,7 @@ int main(int argc, char *argv[])
     if (argc == 1)
         ft_error(-1);
     check_valid_char(argv[1]);
-    //split_by_equal(argv[1]);
+    split_by_equal(argv[1]);
 
 
     // double a =(double)(4.9);
