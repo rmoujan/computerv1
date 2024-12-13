@@ -154,33 +154,36 @@ string remove_space(string word)
 
 }
 
-void flag_sign(string word)
+string flag_sign(string word)
 {
-    int i= 1 ;
-                if (word[0] == '+')
-                {
-                    word[0]='@';
-                }
-                else (word[0] == '-')
-                {
-                    word[0]='%';
-                }
+    int i = 1;
+
+    if (word[0] == '+')
+        word[0] = '@';
+    else if (word[0] == '-')
+        word[0] = '%';
+    
     while(word[i])
     {
         if (word[i] == '=')
         {
+            cout <<"==========|"<<word[i]<<"| and |"<<word[i + 1]<<"|"<<endl;
                 if (word[i + 1] == '+')
                 {
+                    cout <<"=== et +++ "<<endl;
                     word[i + 1]='@';
                 }
-                else (word[i] == '-')
+                else if (word[i + 1] == '-')
                 {
+                    cout <<"=== et --- "<<endl;
                     word[i + 1]='%';
                 }
         }
-        
+        i++;
     }
+    return word;
 }
+
 int main(int argc, char *argv[])
 {
     cout <<"argc is "<<argc<<endl;
@@ -191,8 +194,9 @@ int main(int argc, char *argv[])
     string word = remove_space(argv[1]);
     cout <<"******* Word after remove spaces |"<<word<<endl;
     //then flagi beginne d equation if there is a sign and after =.
-    flag_sign(word);
-    string newStr = replace_with_minus(argv[1]);
+    string strr = flag_sign(word);
+    cout <<"** after flag sign" <<strr<<endl;
+    string newStr = replace_with_minus(strr);
     cout <<"AFTER argv is "<<newStr<<endl;
 
     vector<string> data;
