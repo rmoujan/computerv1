@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <map>
+#include <regex>
 using namespace std;
 
 void ft_error(int code)
@@ -76,7 +77,7 @@ void split_by_space(string str)
     std::cout << "Size of the vector: " << tokens.size() << std::endl;
 }
 
-void split_by_equal(string str)
+vector<string> split_by_equal(string str)
 {
     
     string token;
@@ -92,6 +93,7 @@ void split_by_equal(string str)
         ft_error(-2);
 
     cout <<"SIZE OF VECTOR IS "<<data.size()<<endl;
+    return (data);
 }
 
 //valid chars are: numbers / - + * =  ^ . space / X / 
@@ -120,27 +122,84 @@ int check_valid_char(string str)
     return (1);
 }
 
-void split_by_plus(string str)
+void split_by_minus(string str)
 {
     string token;
     vector<string> data;
     std::istringstream ss(str);
-
-    while (std::getline(ss, token, '+')){
+    cout<<"Split by MINUS"<<std::endl;
+    while (std::getline(ss, token, '-')){
         cout<<"|"<<token<<"|"<<endl;
         data.push_back(token);
+    }
+}
+string replace_with_minus(string str) {
+
+    int i = 0;
+    while (str[i])
+    {
+        if (str[i] == '+')
+        {
+            str[i] = '-';
+        }
+        i++;
+    }
+    return str;
+}
+
+string remove_space(string word)
+{
+    word = regex_replace(word, regex(" "), "");
+    return word;
+
+}
+
+void flag_sign(string word)
+{
+    int i= 1 ;
+                if (word[0] == '+')
+                {
+                    word[0]='@';
+                }
+                else (word[0] == '-')
+                {
+                    word[0]='%';
+                }
+    while(word[i])
+    {
+        if (word[i] == '=')
+        {
+                if (word[i + 1] == '+')
+                {
+                    word[i + 1]='@';
+                }
+                else (word[i] == '-')
+                {
+                    word[i + 1]='%';
+                }
+        }
+        
     }
 }
 int main(int argc, char *argv[])
 {
     cout <<"argc is "<<argc<<endl;
-    cout <<"argv is "<<argv[1]<<endl;
+    cout <<"BEFORE argv is "<<argv[1]<<endl;
     if (argc == 1)
         ft_error(-1);
-    check_valid_char(argv[1]);
-    // split_by_equal(argv[1]);
-    split_by_plus(argv[1]);
-    // double a =(double)(4.9);
-    // cout<<"value of a is "<<(double)a<<endl;
+    // check_valid_char(argv[1]);
+    string word = remove_space(argv[1]);
+    cout <<"******* Word after remove spaces |"<<word<<endl;
+    //then flagi beginne d equation if there is a sign and after =.
+    flag_sign(word);
+    string newStr = replace_with_minus(argv[1]);
+    cout <<"AFTER argv is "<<newStr<<endl;
+
+    vector<string> data;
+    data = split_by_equal(newStr);
+    split_by_minus(data[0]);
+    cout<<"*********** Second str "<<endl;
+    split_by_minus(data[1]);
+    cout <<"Original string" <<argv[1];
     return 0;
 }
