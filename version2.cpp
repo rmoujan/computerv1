@@ -61,7 +61,7 @@ void ft_output()
 //     return 0;
 // }
 
-void split_by_equal(string str)
+void split_by_space(string str)
 {
 
     vector<string> tokens;
@@ -76,13 +76,34 @@ void split_by_equal(string str)
     std::cout << "Size of the vector: " << tokens.size() << std::endl;
 }
 
+void split_by_equal(string str)
+{
+    
+    string token;
+    vector<string> data;
+    std::istringstream ss(str);
+
+    while (std::getline(ss, token, '=')){
+        cout<<"|"<<token<<"|"<<endl;
+        data.push_back(token);
+    }
+
+    if (data.size() != 2)
+        ft_error(-2);
+
+    cout <<"SIZE OF VECTOR IS "<<data.size()<<endl;
+}
+
 //valid chars are: numbers / - + * =  ^ . space / X / 
 int check_valid_char(string str)
 {
     int i = 0;
-    cout <<"Tets check valid char"<<endl;
+    int flag = 0;
+    cout <<"Test check valid char"<<endl;
     while(str[i])
     {
+        if (str[i] == '=')
+            flag++;
         if ( !((str[i]>= '0' && str[i] <= '9') || str[i] == '+' 
                 || str[i] == '-' ||  str[i] == '=' 
                     || str[i] =='*' || str[i]== '^' 
@@ -93,8 +114,22 @@ int check_valid_char(string str)
                     }
         i++;
     }
+    if (flag != 1)
+        ft_error(-2);
     cout <<"after while"<<endl;
     return (1);
+}
+
+void split_by_plus(string str)
+{
+    string token;
+    vector<string> data;
+    std::istringstream ss(str);
+
+    while (std::getline(ss, token, '+')){
+        cout<<"|"<<token<<"|"<<endl;
+        data.push_back(token);
+    }
 }
 int main(int argc, char *argv[])
 {
@@ -103,9 +138,8 @@ int main(int argc, char *argv[])
     if (argc == 1)
         ft_error(-1);
     check_valid_char(argv[1]);
-    split_by_equal(argv[1]);
-
-
+    // split_by_equal(argv[1]);
+    split_by_plus(argv[1]);
     // double a =(double)(4.9);
     // cout<<"value of a is "<<(double)a<<endl;
     return 0;
