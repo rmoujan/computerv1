@@ -18,6 +18,7 @@ void ft_error(int code)
     }
         exit(0);
 }
+
 void ft_output()
 {
     cout<<"Reduced form: "<<endl;
@@ -132,8 +133,41 @@ vector<string> split_by_minus(string str)
         cout<<"|"<<token<<"|"<<endl;
         data.push_back(token);
     }
-    return dt
+    return data;
 }
+
+
+vector<string> split_vec_by_star(vector<string> vec)
+{
+    string token;
+    vector<string> data;
+    for (string value: vec)
+    {
+        std::istringstream ss(value);
+        cout<<"Split The Vector by STAR"<<std::endl;
+        while (std::getline(ss, token, '*')){
+            cout<<"|"<<token<<"|"<<endl;
+            data.push_back(token);
+        }
+    }
+    cout <<" ********** After spliting by star :: "<<endl;
+    cout <<"size of vector "<<data.size();
+    cout <<"------------------------"<<endl;
+    for (string value:data)
+    {
+        cout <<"|"<<value<<"|"<<endl;
+    }
+    cout <<"-----------------------------"<<endl;
+    cout <<"Size of the original vec is "<<vec.size()<<endl;
+    if (vec.size() * 2 != data.size() && vec.size() != 1)
+    {
+        ft_error(-2);
+    }
+    cout <<"FINAL "<<endl;
+    return data;
+}
+
+
 string replace_with_minus(string str) {
 
     int i = 0;
@@ -185,13 +219,28 @@ string flag_sign(string word)
     return word;
 }
 
+void combine_all(vector<string> leftTokens, vector<string> rightTokens)
+{
+    //store duplicate keys and unsorted :
+    std::vector<std::pair<int, std::string>> all;
+
+    std::vector<string> first;
+    std::vector<string> second;
+
+    split_vec_by_star(leftTokens);
+    split_vec_by_star(rightTokens);
+
+
+}
+
+
 int main(int argc, char *argv[])
 {
     // cout <<"argc is "<<argc<<endl;
     // cout <<"BEFORE argv is "<<argv[1]<<endl;
     if (argc == 1)
         ft_error(-1);
-    // check_valid_char(argv[1]);
+     check_valid_char(argv[1]);
     string word = remove_space(argv[1]);
     // cout <<"******* Word after remove spaces |"<<word<<endl;
     //then flagi beginne d equation if there is a sign and after =.
@@ -206,9 +255,11 @@ int main(int argc, char *argv[])
 
     data = split_by_equal(newStr);
     leftTokens = split_by_minus(data[0]);
-
+    cout <<"size of leftTokens is "<<leftTokens.size()<<endl;
+   
     cout<<"*********** Second str "<<endl;
     rightTokens = split_by_minus(data[1]);
+    combine_all(leftTokens, rightTokens);
     // cout <<"Original string" <<argv[1]<<endl;
     return 0;
 }
