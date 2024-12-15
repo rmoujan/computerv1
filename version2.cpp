@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include <regex>
+
 using namespace std;
 
 void ft_error(int code)
@@ -159,10 +160,11 @@ vector<string> split_vec_by_star(vector<string> vec)
     }
     cout <<"-----------------------------"<<endl;
     cout <<"Size of the original vec is "<<vec.size()<<endl;
-    if (vec.size() * 2 != data.size() && vec.size() != 1)
-    {
-        ft_error(-2);
-    }
+    //hadi ila zedtha , u ll nor handle the bonus
+    // if (vec.size() * 2 != data.size() && vec.size() != 1)
+    // {
+    //     ft_error(-2);
+    // }
     cout <<"FINAL "<<endl;
     return data;
 }
@@ -227,12 +229,18 @@ void combine_all(vector<string> leftTokens, vector<string> rightTokens)
     std::vector<string> first;
     std::vector<string> second;
 
-    split_vec_by_star(leftTokens);
-    split_vec_by_star(rightTokens);
+    // split_vec_by_star(leftTokens);
+    // split_vec_by_star(rightTokens);
 
 
 }
 
+void check_format_expo(vector<string> data)
+{
+    //should check the 4 cases :
+    // 1 case :
+    
+}
 
 int main(int argc, char *argv[])
 {
@@ -256,10 +264,15 @@ int main(int argc, char *argv[])
     data = split_by_equal(newStr);
     leftTokens = split_by_minus(data[0]);
     cout <<"size of leftTokens is "<<leftTokens.size()<<endl;
-   
-    cout<<"*********** Second str "<<endl;
-    rightTokens = split_by_minus(data[1]);
-    combine_all(leftTokens, rightTokens);
+    cout <<"LEFTTOKENS "<<endl;
+    for (string value:leftTokens)
+    {
+        cout <<"{"<<value<<"}"<<endl;
+    }
+    check_format_expo(leftTokens);
+    // cout<<"*********** Second str "<<endl;
+    // rightTokens = split_by_minus(data[1]);
+    // combine_all(leftTokens, rightTokens);
     // cout <<"Original string" <<argv[1]<<endl;
     return 0;
 }
