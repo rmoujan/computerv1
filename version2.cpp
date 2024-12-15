@@ -234,12 +234,30 @@ void combine_all(vector<string> leftTokens, vector<string> rightTokens)
 
 
 }
-
+//take the number jsk each the end of string r reach the star.
+//WESLT HENA 
 void check_format_expo(vector<string> data)
 {
+    int i = 0;
+    // int key, 
+    // string expo;
     //should check the 4 cases :
     // 1 case :
-    
+    for (string str:data)
+    {
+        cout <<"****** "<<str<<endl;
+        size_t pos = str.find('*');
+
+        if (pos != std::string::npos) {
+            // Extract substring up to the delimiter
+            std::string result = str.substr(0, pos);
+            std::cout << "Substring before *: " << result << std::endl;
+            std::cout << "Substring after  *: " << str.substr(++pos)<< std::endl;
+        }
+        else {
+            std::cout << "Delimiter not found!" << std::endl;
+            }
+    }
 }
 
 int main(int argc, char *argv[])
@@ -265,10 +283,10 @@ int main(int argc, char *argv[])
     leftTokens = split_by_minus(data[0]);
     cout <<"size of leftTokens is "<<leftTokens.size()<<endl;
     cout <<"LEFTTOKENS "<<endl;
-    for (string value:leftTokens)
-    {
-        cout <<"{"<<value<<"}"<<endl;
-    }
+    // for (string value:leftTokens)
+    // {
+    //     cout <<"{"<<value[0]<<"}"<<endl;
+    // }
     check_format_expo(leftTokens);
     // cout<<"*********** Second str "<<endl;
     // rightTokens = split_by_minus(data[1]);

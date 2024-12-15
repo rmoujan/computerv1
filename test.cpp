@@ -1,57 +1,80 @@
+// // #include <iostream>
+// // #include <algorithm>
+// // #include <string>
+// // using namespace std;
+// // int main() {
+// //     std::string str = "Hello world from C++";
+
+// //     // Remove spaces from the string
+// //     // cout<<"begn "<<str.begin()<<endl;
+// //     // cout<<"end "<<str.end()<<endl;
+
+// //     str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+
+// //     std::cout << "String without spaces: " << str << std::endl;
+
+// //     return 0;
+// // }
+
+
 // #include <iostream>
-// #include <algorithm>
-// #include <string>
+// #include <unordered_map>
 // using namespace std;
+
+// // function prototype for display_unordered_map()
+// void display_unordered_map(const unordered_map<int, string> &);
+
 // int main() {
-//     std::string str = "Hello world from C++";
 
-//     // Remove spaces from the string
-//     // cout<<"begn "<<str.begin()<<endl;
-//     // cout<<"end "<<str.end()<<endl;
+//   unordered_map<int, string> student {
 
-//     str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
-
-//     std::cout << "String without spaces: " << str << std::endl;
-
-//     return 0;
-// }
-
-
-#include <iostream>
-#include <unordered_map>
-using namespace std;
-
-// function prototype for display_unordered_map()
-void display_unordered_map(const unordered_map<int, string> &);
-
-int main() {
-
-  unordered_map<int, string> student {
-
-    {132, "Mark"},
-    {143, "Chris"},
-     {132, "reshe"},
-  };
+//     {132, "Mark"},
+//     {143, "Chris"},
+//      {132, "reshe"},
+//   };
   
-  cout << "Initial Unordered Map:\n";
-  display_unordered_map(student);
-
-//   // remove element with key: 143  
-//   student.erase(143);
-  
-//   cout << "\nFinal Unordered Map: \n";
+//   cout << "Initial Unordered Map:\n";
 //   display_unordered_map(student);
 
-  return 0;
-}
+// //   // remove element with key: 143  
+// //   student.erase(143);
+  
+// //   cout << "\nFinal Unordered Map: \n";
+// //   display_unordered_map(student);
 
-// utility function to print unordered_map elements
-void display_unordered_map(const unordered_map<int, string> &umap){
+//   return 0;
+// }
 
-  for(const auto& key_value: umap) {
-    int key = key_value.first;
-    string value = key_value.second;
+// // utility function to print unordered_map elements
+// void display_unordered_map(const unordered_map<int, string> &umap){
+
+//   for(const auto& key_value: umap) {
+//     int key = key_value.first;
+//     string value = key_value.second;
     
-    cout << key << " - " << value << endl;
-  }
+//     cout << key << " - " << value << endl;
+//   }
+// }
+
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string str = "Hello,World!";
+    char delimiter = ','; // Delimiter
+
+    // Find the delimiter
+    size_t pos = str.find(delimiter);
+
+    if (pos != std::string::npos) {
+        // Extract substring up to the delimiter
+        std::string result = str.substr(0, pos);
+        std::cout << "Substring: " << result << std::endl;
+        std::cout << "Substring: " << str.substr(++pos)<< std::endl;
+
+    } else {
+      std::cout << "Delimiter not found!" << std::endl;
+    }
+
+    return 0;
 }
