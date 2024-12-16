@@ -141,7 +141,7 @@ vector<string> split_by_minus(string str)
     string token;
     vector<string> data;
     std::istringstream ss(str);
-    cout<<"Split by MINUS"<<std::endl;
+    cout<<"Split by MINUS  |"<<str<<"|"<<std::endl;
     while (std::getline(ss, token, '-')){
         cout<<"|"<<token<<"|"<<endl;
         data.push_back(token);
@@ -265,7 +265,7 @@ double get_number(string str)
     return (0);
 }
 
-string get_expo(string str)
+void get_expo(string str)
 {
     cout <<"----------- Start Handling the expo ------------ "<<endl;
     cout<<"length of str is "<<str.length()<<endl;
@@ -277,14 +277,14 @@ string get_expo(string str)
     {
         ft_error(-2);
     }
-    return "";
 }
 //take the number jsk each the end of string or reach the star.
 //WESLT HENA 
-void check_format_expo_left(vector<string> data)
+vector<pair<double, string>> check_format_expo_left(vector<string> data)
 {
     int i = 0;
     double number;
+    vector<pair<double, string>> leftAll;//like map but hold duplicated keys and unorder
     // int key, 
     // string expo;
     //should check the 4 cases :
@@ -302,21 +302,27 @@ void check_format_expo_left(vector<string> data)
             result = str.substr(++pos);
             cout << "Substring after  *: " << result<<" and length of str is "<<result.length()<< endl;
             get_expo(result);
+            leftAll.push_back({number, result});
         }
         else {
             //there is no star, that's mean , should check if the input is a nbr or expo
             std::cout << "Delimiter not found!" << endl;
+            double numiro = get_number(str);
+            leftAll.push_back({numiro, ""});
+            //SHOULD BE A NUMBER AND i WLL PREDICT THE X HAS 0 EXP.x^0
             }
     }
+    return leftAll;
 }
 
 int main(int argc, char *argv[])
 {
+    vector<pair<double, string>> leftAll;
     // cout <<"argc is "<<argc<<endl;
     // cout <<"BEFORE argv is "<<argv[1]<<endl;
     if (argc == 1)
         ft_error(-1);
-     check_valid_char(argv[1]);
+    check_valid_char(argv[1]);
     string word = remove_space(argv[1]);
     cout <<"******* Word after remove spaces |"<<word<<endl;
     //then flagi beginne d equation if there is a sign and after =.
@@ -337,7 +343,12 @@ int main(int argc, char *argv[])
     // {
     //     cout <<"{"<<value[0]<<"}"<<endl;
     // }
-    check_format_expo_left(leftTokens);
+    leftAll = check_format_expo_left(leftTokens);
+      // Display the vector
+      cout <<"OUTPUT THE VECTOR WITH KEY/VALUE "<<endl;
+    for (const auto& p : leftAll) {
+        std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+    }
     // cout<<"*********** Second str "<<endl;
     // rightTokens = split_by_minus(data[1]);
     // combine_all(leftTokens, rightTokens);
