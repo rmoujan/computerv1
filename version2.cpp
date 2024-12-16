@@ -6,6 +6,9 @@
 #include <regex>
 
 using namespace std;
+//global variables.
+char degree;
+string reduced;
 
 void ft_error(int code)
 {
@@ -318,7 +321,14 @@ vector<pair<double, string>> check_format_expo_left(vector<string> data)
 //need to check if the exp are organized.
 void check_order_exp(vector<pair<double, string>>)
 {
-
+    //declare an array of chars  and fill it with the last char in each vector.
+    //wash n filli array of chars then nshof wash sorted or not
+    //yes bash t cheki ta right side and pick the greates one.
+    //and save the greates in the degree
+    //then switch the right to left (with calcul and pay attention to sign)
+    //make the reduced form
+    //calcul delta
+    //handle exceptions.
 }
 int main(int argc, char *argv[])
 {
