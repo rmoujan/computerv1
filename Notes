@@ -22,3 +22,17 @@ P(x) = ax^(n) + bx^(n-1) + cx^(n - 2) ...
 
 1-split by equal =
 2- split by space (addih)
+
+// output the left and right sides of equation :
+ "7*X^2 + 3*X^1 + 1*X^3 - 6*X^2 + 8 * X = 7*X^0 - 7*X^3 + 8"
+OUTPUT THE Left VECTOR WITH KEY/VALUE
+
+{7, X^2}
+{3, X^1}
+{1, X^3}
+{6, X^2}
+{8, X}
+OUTPUT THE Right VECTOR WITH KEY/VALUE 
+{7, X^0}
+{7, X^3}
+{8, }

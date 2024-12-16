@@ -314,10 +314,16 @@ vector<pair<double, string>> check_format_expo_left(vector<string> data)
     }
     return leftAll;
 }
+//take the last char of value.
+//need to check if the exp are organized.
+void check_order_exp(vector<pair<double, string>>)
+{
 
+}
 int main(int argc, char *argv[])
 {
     vector<pair<double, string>> leftAll;
+    vector<pair<double, string>> rightAll;
     // cout <<"argc is "<<argc<<endl;
     // cout <<"BEFORE argv is "<<argv[1]<<endl;
     if (argc == 1)
@@ -337,6 +343,7 @@ int main(int argc, char *argv[])
 
     data = split_by_equal(newStr);
     leftTokens = split_by_minus(data[0]);
+    rightTokens = split_by_minus(data[1]);
     // cout <<"size of leftTokens is "<<leftTokens.size()<<endl;
     // cout <<"LEFTTOKENS "<<endl;
     // for (string value:leftTokens)
@@ -344,13 +351,19 @@ int main(int argc, char *argv[])
     //     cout <<"{"<<value[0]<<"}"<<endl;
     // }
     leftAll = check_format_expo_left(leftTokens);
-      // Display the vector
-      cout <<"OUTPUT THE VECTOR WITH KEY/VALUE "<<endl;
+    rightAll = check_format_expo_left(rightTokens);
+    // Display the vector
+    cout <<"OUTPUT THE Left VECTOR WITH KEY/VALUE "<<endl;
     for (const auto& p : leftAll) {
         std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
     }
+    cout <<"OUTPUT THE Right VECTOR WITH KEY/VALUE "<<endl;
+    for (const auto& p : rightAll) {
+        std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+    }
+    //check order of expo :
+    check_order_exp(leftAll);
     // cout<<"*********** Second str "<<endl;
-    // rightTokens = split_by_minus(data[1]);
     // combine_all(leftTokens, rightTokens);
     // cout <<"Original string" <<argv[1]<<endl;
     return 0;
