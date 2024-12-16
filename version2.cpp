@@ -17,6 +17,14 @@ void ft_error(int code)
     {
         cout <<"Error : Unexpected Format !!!"<<endl;
     }
+    if (code == -3)
+    {
+        cout <<"Error : Invalid argument"<<endl;
+    }
+    if (code == -4)
+    {
+        cout <<"Error : Out of range"<<endl;
+    }
         exit(0);
 }
 
@@ -234,28 +242,62 @@ void combine_all(vector<string> leftTokens, vector<string> rightTokens)
 
 
 }
-//take the number jsk each the end of string r reach the star.
+
+double get_number(string str)
+{
+    try {
+        if (str[0] == '@')
+            str[0]='+';
+        else if (str[0] == '%')
+            str[0] = '-';
+        double num = std::stod(str); // Attempt to convert
+        std::cout << "Integer: " << num << std::endl;
+        return num;
+    } catch (const std::invalid_argument& e) {
+        ft_error(-3);
+    } catch (const std::out_of_range& e) {
+        ft_error(-4);
+    }
+    return (0);
+}
+
+string get_expo(string str)
+{
+    cout <<"----------- Start Handling the expo ------------ "<<endl;
+    cout<<"length of str is "<<str.length()<<endl;
+    if (str.length() == 0)
+        {
+            ft_error(-2);
+        }
+    return "";
+}
+//take the number jsk each the end of string or reach the star.
 //WESLT HENA 
-void check_format_expo(vector<string> data)
+void check_format_expo_left(vector<string> data)
 {
     int i = 0;
+    double number;
     // int key, 
     // string expo;
     //should check the 4 cases :
     // 1 case :
     for (string str:data)
     {
-        cout <<"****** "<<str<<endl;
+        cout <<"[ First String: "<<str<<endl;
         size_t pos = str.find('*');
-
-        if (pos != std::string::npos) {
+        // if this is true, then am expecting two strings , first is number , second if expo.
+        if (pos != string::npos) {
             // Extract substring up to the delimiter
-            std::string result = str.substr(0, pos);
-            std::cout << "Substring before *: " << result << std::endl;
-            std::cout << "Substring after  *: " << str.substr(++pos)<< std::endl;
+            string result = str.substr(0, pos);
+            number = get_number(result);
+            cout << "Substring before *: " << result << endl;
+            result = str.substr(++pos);
+            get_expo(result);
+            cout << "Substring after  *: " << result<<"length of str is "<<result.length()<< endl;
         }
         else {
-            std::cout << "Delimiter not found!" << std::endl;
+            //there is no star, that's mean , should check if the input is a nbr or expo
+            std::cout << "Delimiter not found!" << endl;
             }
     }
 }
@@ -268,7 +310,7 @@ int main(int argc, char *argv[])
         ft_error(-1);
      check_valid_char(argv[1]);
     string word = remove_space(argv[1]);
-    // cout <<"******* Word after remove spaces |"<<word<<endl;
+    cout <<"******* Word after remove spaces |"<<word<<endl;
     //then flagi beginne d equation if there is a sign and after =.
     string strr = flag_sign(word);
     // cout <<"** after flag sign" <<strr<<endl;
@@ -281,13 +323,13 @@ int main(int argc, char *argv[])
 
     data = split_by_equal(newStr);
     leftTokens = split_by_minus(data[0]);
-    cout <<"size of leftTokens is "<<leftTokens.size()<<endl;
-    cout <<"LEFTTOKENS "<<endl;
+    // cout <<"size of leftTokens is "<<leftTokens.size()<<endl;
+    // cout <<"LEFTTOKENS "<<endl;
     // for (string value:leftTokens)
     // {
     //     cout <<"{"<<value[0]<<"}"<<endl;
     // }
-    check_format_expo(leftTokens);
+    check_format_expo_left(leftTokens);
     // cout<<"*********** Second str "<<endl;
     // rightTokens = split_by_minus(data[1]);
     // combine_all(leftTokens, rightTokens);
