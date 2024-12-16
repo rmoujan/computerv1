@@ -25,6 +25,10 @@ void ft_error(int code)
     {
         cout <<"Error : Out of range"<<endl;
     }
+    if (code == -5)
+    {
+        cout <<"Error : Out of range"<<endl;
+    }
         exit(0);
 }
 
@@ -269,6 +273,10 @@ string get_expo(string str)
         {
             ft_error(-2);
         }
+    else if (str != "X^0" && str != "X^1" && str != "X^2" && str != "X^3" && str != "X")
+    {
+        ft_error(-2);
+    }
     return "";
 }
 //take the number jsk each the end of string or reach the star.
@@ -292,8 +300,8 @@ void check_format_expo_left(vector<string> data)
             number = get_number(result);
             cout << "Substring before *: " << result << endl;
             result = str.substr(++pos);
+            cout << "Substring after  *: " << result<<" and length of str is "<<result.length()<< endl;
             get_expo(result);
-            cout << "Substring after  *: " << result<<"length of str is "<<result.length()<< endl;
         }
         else {
             //there is no star, that's mean , should check if the input is a nbr or expo
