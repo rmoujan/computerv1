@@ -360,7 +360,10 @@ void check_order_exp(vector<pair<double, string>> leftAll)
     }
 }
 
-
+void calcul_tokens()
+{
+    
+}
 
 int main(int argc, char *argv[])
 {
@@ -407,6 +410,7 @@ int main(int argc, char *argv[])
        //check order of expo :
     cout <<" --------------- Calling the fct check order exp "<<endl;
     check_order_exp(leftAll);
+    check_order_exp(rightAll);
     // cout<<"*********** Second str "<<endl;
     // combine_all(leftTokens, rightTokens);
     // cout <<"Original string" <<argv[1]<<endl;
