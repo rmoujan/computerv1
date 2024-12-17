@@ -199,6 +199,11 @@ string replace_with_minus(string str) {
         if (str[i] == '+')
         {
             str[i] = '-';
+            str.insert(i + 1, 1, '@');
+        }
+        else if (str[i] == '-')
+        {
+            str.insert(i + 1, 1, '%');
         }
         i++;
     }
@@ -360,6 +365,8 @@ void check_order_exp(vector<pair<double, string>> leftAll)
     }
 }
 
+// add numbers with the same coefficients:
+// making the reduced form:
 void calcul_tokens()
 {
     
@@ -398,7 +405,20 @@ int main(int argc, char *argv[])
     leftAll = check_format_expo_left(leftTokens);
     rightAll = check_format_expo_left(rightTokens);
     // Display the vector
-    cout <<"OUTPUT THE Left VECTOR WITH KEY/VALUE "<<endl;
+    // cout <<"OUTPUT THE Left VECTOR WITH KEY/VALUE "<<endl;
+    // for (const auto& p : leftAll) {
+    //     std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+    // }
+    // cout <<"OUTPUT THE Right VECTOR WITH KEY/VALUE "<<endl;
+    // for (const auto& p : rightAll) {
+    //     std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+    // }
+    //check order of expo :
+       //check order of expo :
+    cout <<" --------------- Calling the fct check order exp "<<endl;
+    check_order_exp(leftAll);
+    check_order_exp(rightAll);
+        cout <<"OUTPUT THE Left VECTOR WITH KEY/VALUE "<<endl;
     for (const auto& p : leftAll) {
         std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
     }
@@ -406,15 +426,10 @@ int main(int argc, char *argv[])
     for (const auto& p : rightAll) {
         std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
     }
-    //check order of expo :
-       //check order of expo :
-    cout <<" --------------- Calling the fct check order exp "<<endl;
-    check_order_exp(leftAll);
-    check_order_exp(rightAll);
     // cout<<"*********** Second str "<<endl;
     // combine_all(leftTokens, rightTokens);
     // cout <<"Original string" <<argv[1]<<endl;
-        cout <<"Main Global degree is  |"<<degree<<"|"<<endl;
+    // cout <<"Main Global degree is  |"<<degree<<"|"<<endl;
 
     return 0;
 }
