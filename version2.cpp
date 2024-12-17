@@ -9,6 +9,8 @@ using namespace std;
 //global variables.
 char degree;
 string reduced;
+int flag = 0;
+
 
 void ft_error(int code)
 {
@@ -32,65 +34,22 @@ void ft_error(int code)
     {
         cout <<"Error : Out of range"<<endl;
     }
+    if (code == -6)
+    {
+        cout <<"Error : The Exponents aren't organized"<<endl;
+    }
         exit(0);
 }
 
 void ft_output()
 {
     cout<<"Reduced form: "<<endl;
-    cout<<"Polynomial degree: "<<endl;
-    cout<<"The solution is: "<<endl;
-}
-
-// int ft_check_coefficient()
-// {
-// }
-// int ft_check_exponent()
-// {
-// }
-
-// int create_reduced_form(string str)
-// {
-//     vector<string> tokens;
-//     string token;
-//     std::istringstream ss(str);
-//     int flag = 0;
-//     while (std::getline(ss, token, ' ')) {
-//         if (flag == 1)
-//         {
-//             if (token == "0" || token == "1" || token == "2"
-//                 || token == "3" || token == "4" || token == "5" 
-//                 || token == "6" || token == "7" || token == "8" 
-//                 || token == "9")
-//                 {
-//                     cout <<"OK this is token|"<<token<<"|"<<endl;
-//                     tokens.push_back("-");
-
-//                 }
-//         }
-//         tokens.push_back(token);
-//         if (token == "=")
-//             flag++;
-//     }
-
-//     for (const auto& word : tokens) {
-//         std::cout << word << std::endl;
-//     }
-//     return 0;
-// }
-
-void split_by_space(string str)
-{
-
-    vector<string> tokens;
-    string token;
+    cout<<"Polynomial degree: "<<endl;The vector is not sorted
     map<string, float> equation;
     
         std::istringstream tt(str);
         while (tt >> token) {
-            cout<<"|"<<token<<"|"<<endl;
-            tokens.push_back(token);
-        }
+            cout<<"|"<<token<<"|"<<endl;The vector is not sorted
     // std::cout << "Size of the vector: " << tokens.size() << std::endl;
 }
 
@@ -114,12 +73,7 @@ vector<string> split_by_equal(string str)
 }
 
 //valid chars are: numbers / - + * =  ^ . space / X / 
-int check_valid_char(string str)
-{
-    int i = 0;
-    int flag = 0;
-    // cout <<"Test check valid char"<<endl;
-    while(str[i])
+int check_valid_char(string str)how did you find me
     {
         if (str[i] == '=')
             flag++;
@@ -129,14 +83,12 @@ int check_valid_char(string str)
                         || str[i] == 'X' || str[i] == ' ' || str[i] == '.') )
                     {
                         // cout <<"|Inside check valid "<<str[i]<<"|"<<endl;
-                        ft_error(-2);
+                        ft_error(-2);The vector is not sorted
                     }
         i++;
     }
     if (flag != 1)
-        ft_error(-2);
-    // cout <<"after while"<<endl;
-    return (1);
+        ft_error(-2);The vector is not sorted
 }
 
 vector<string> split_by_minus(string str)
@@ -147,15 +99,7 @@ vector<string> split_by_minus(string str)
     cout<<"Split by MINUS  |"<<str<<"|"<<std::endl;
     while (std::getline(ss, token, '-')){
         cout<<"|"<<token<<"|"<<endl;
-        data.push_back(token);
-    }
-    return data;
-}
-
-
-vector<string> split_vec_by_star(vector<string> vec)
-{
-    string token;
+        data.push_back(token);The vector is not sorted
     vector<string> data;
     for (string value: vec)
     {
@@ -175,21 +119,13 @@ vector<string> split_vec_by_star(vector<string> vec)
     }
     cout <<"-----------------------------"<<endl;
     cout <<"Size of the original vec is "<<vec.size()<<endl;
-    //hadi ila zedtha , u ll nor handle the bonus
-    // if (vec.size() * 2 != data.size() && vec.size() != 1)
-    // {
-    //     ft_error(-2);
-    // }
-    cout <<"FINAL "<<endl;
-    return data;
-}
-
+    //hadi ila zedtha , u ll nor handle the bonusThe vector is not sorted
 
 string replace_with_minus(string str) {
 
     int i = 0;
     while (str[i])
-    {
+    {The vector is not sorted
         if (str[i] == '+')
         {
             str[i] = '-';
@@ -229,8 +165,7 @@ string flag_sign(string word)
                 {
                     // cout <<"=== et --- "<<endl;
                     word[i + 1]='%';
-                }
-        }
+                }The vector is not sorted
         i++;
     }
     return word;
@@ -287,7 +222,7 @@ vector<pair<double, string>> check_format_expo_left(vector<string> data)
 {
     int i = 0;
     double number;
-    vector<pair<double, string>> leftAll;//like map but hold duplicated keys and unorder
+    vector<pair<double, string>> leftAll; //like map but hold duplicated keys and unorder
     // int key, 
     // string expo;
     //should check the 4 cases :
@@ -318,17 +253,32 @@ vector<pair<double, string>> check_format_expo_left(vector<string> data)
     return leftAll;
 }
 //take the last char of value.
-//need to check if the exp are organized.
-void check_order_exp(vector<pair<double, string>>)
+//need to check if the exp are organized from the lower to the bigger.
+void check_order_exp(vector<pair<double, string>> leftAll)
 {
-    //declare an array of chars  and fill it with the last char in each vector.
-    //wash n filli array of chars then nshof wash sorted or not
-    //yes bash t cheki ta right side and pick the greates one.
-    //and save the greates in the degree
-    //then switch the right to left (with calcul and pay attention to sign)
-    //make the reduced form
-    //calcul delta
-    //handle exceptions.
+    std::vector<char> charExpo;
+    if (!leftAll.empty())
+    {
+        for (const auto& p : leftAll) {
+            if (!p.second.empty()){
+                std::cout << "{ value :" << p.second.back() << "}" << std::endl;
+                if (p.second.back() == 'X')
+                    charExpo.push_back('1');
+                else
+                    charExpo.push_back(p.second.back());
+            }
+        }
+    }
+    cout <<"--- Outputing char chars ---- "<<endl;
+    for(const auto & c: charExpo)
+    {
+        cout <<"A: "<<c<<endl;
+    }
+    if (std::is_sorted(charExpo.begin(), charExpo.end())) {
+        flag = 1;
+    } else
+        ft_error(-6);
+    
 }
 int main(int argc, char *argv[])
 {
@@ -363,15 +313,16 @@ int main(int argc, char *argv[])
     leftAll = check_format_expo_left(leftTokens);
     rightAll = check_format_expo_left(rightTokens);
     // Display the vector
-    cout <<"OUTPUT THE Left VECTOR WITH KEY/VALUE "<<endl;
-    for (const auto& p : leftAll) {
-        std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
-    }
-    cout <<"OUTPUT THE Right VECTOR WITH KEY/VALUE "<<endl;
-    for (const auto& p : rightAll) {
-        std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
-    }
+    // cout <<"OUTPUT THE Left VECTOR WITH KEY/VALUE "<<endl;
+    // for (const auto& p : leftAll) {
+    //     std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+    // }
+    // cout <<"OUTPUT THE Right VECTOR WITH KEY/VALUE "<<endl;
+    // for (const auto& p : rightAll) {
+    //     std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+    // }
     //check order of expo :
+    cout <<" --------------- Calling the fct check order exp "<<endl;
     check_order_exp(leftAll);
     // cout<<"*********** Second str "<<endl;
     // combine_all(leftTokens, rightTokens);
