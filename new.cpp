@@ -348,28 +348,47 @@ void check_order_exp(vector<pair<double, string>> leftAll)
             }
         }
     }
-    cout <<"--- Outputing char chars ---- "<<endl;
-    for(const auto & c: charExpo)
+    if (!charExpo.empty())
     {
-        cout <<"A: "<<c<<endl;
-    }
-    if (std::is_sorted(charExpo.begin(), charExpo.end())) {
-        flag = 1;
-         auto maxIt = std::max_element(charExpo.begin(), charExpo.end());
-         if (*maxIt > degree)
-            degree = *maxIt;
-         cout <<"Max Degree is "<<*maxIt<<endl;
-    } else {
-        ft_error(-6);
-        std::cout << "The vector is not sorted." << std::endl;
+        cout <<"--- Outputing char chars ---- "<<endl;
+        for(const auto & c: charExpo)
+        {
+            cout <<"A: "<<c<<endl;
+        }
+        if (std::is_sorted(charExpo.begin(), charExpo.end())) {
+            flag = 1;
+            auto maxIt = std::max_element(charExpo.begin(), charExpo.end());
+            if (*maxIt > degree)
+                degree = *maxIt;
+            cout <<"Max Degree is "<<*maxIt<<endl;
+        } else {
+            ft_error(-6);
+            std::cout << "The vector is not sorted." << std::endl;
+        }
+
     }
 }
 
+// - * -1 = +
+// + * -1 = -
 // add numbers with the same coefficients:
 // making the reduced form:
-void calcul_tokens()
+void calcul_tokens(const auto & left, const auto & right)
 {
+    // working on two vectors. 
+    // calcul the keys that have the same value:
     
+    for (const auto& p : leftAll) {
+    {
+         if (!leftAll.empty())
+        {
+            if (!p.first.empty() && !p.second.empty())
+            {
+                std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+            }
+
+        }
+    }
 }
 
 int main(int argc, char *argv[])
