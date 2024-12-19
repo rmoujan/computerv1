@@ -268,10 +268,12 @@ double get_number(string str)
             str[0]='+';
         else if (str[0] == '%')
             str[0] = '-';
+
         double num = std::stod(str); // Attempt to convert
         std::cout << "Integer: " << num << std::endl;
         return num;
     } catch (const std::invalid_argument& e) {
+        cout <<"HON "<<endl;
         ft_error(-3);
     } catch (const std::out_of_range& e) {
         ft_error(-4);
@@ -303,6 +305,7 @@ vector<pair<double, string>> check_format_expo_left(vector<string> data)
     // string expo;
     //should check the 4 cases :
     // 1 case :
+    //number * X
     for (string str:data)
     {
         cout <<"[ First String: "<<str<<endl;
@@ -320,10 +323,18 @@ vector<pair<double, string>> check_format_expo_left(vector<string> data)
         }
         else {
             //there is no star, that's mean , should check if the input is a nbr or expo
-            std::cout << "Delimiter not found!" << endl;
+            std::cout << "Delimiter not found! |" <<str<<"|"<< endl;
+            // get_expo(result);
+            //ban liya nezidha hena hadik case deyal @X2 or %X2.
+            // // leftAll.push_back({1, result});
+            // if (!str.empty())
+            // {
+            //     if (str[0] == )
+            // }
             double numiro = get_number(str);
             leftAll.push_back({numiro, ""});
             //SHOULD BE A NUMBER AND i WLL PREDICT THE X HAS 0 EXP.x^0
+            //also may be wil be just the expo , and it is true, bcz I will predict the coeff is 1.
             }
     }
     return leftAll;
@@ -373,23 +384,41 @@ void check_order_exp(vector<pair<double, string>> leftAll)
 // + * -1 = -
 // add numbers with the same coefficients:
 // making the reduced form:
-void calcul_tokens(const auto & left, const auto & right)
-{
-    // working on two vectors. 
-    // calcul the keys that have the same value:
-    
-    for (const auto& p : leftAll) {
-    {
-         if (!leftAll.empty())
-        {
-            if (!p.first.empty() && !p.second.empty())
-            {
-                std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
-            }
 
-        }
-    }
-}
+// void calcul_tokens(vector<pair<double, string>> left, vector<pair<double, string>>right)
+// {
+//     // working on two vectors. 
+//     // calcul the keys that have the same value:
+    
+//     for (const auto& p : left) 
+//     {
+//          if (!p.empty())
+//         {
+//             if (!p.first.empty() && !p.second.empty())
+//             {
+//                 std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+//             }
+
+//         }
+//     }
+// }
+// //ila darti had tarika fash atbghi diri reduced from atl9ay rask zedty 1 --> so error.
+// %1*X^1
+// void add_one_to_exp(vector<string>  &tokens)
+// {
+//     int i = 0;
+//     for (const std::string& t : tokens)
+//     {
+//         if (!t.empty())
+//         {
+//             if (t[1] == 'X')
+//             {
+
+//             }
+//             cout <<"--" <<t[0]<<endl;
+//         }
+//     }
+// }
 
 int main(int argc, char *argv[])
 {
@@ -414,6 +443,7 @@ int main(int argc, char *argv[])
 
     data = split_by_equal(newStr);
     leftTokens = split_by_minus(data[0]);
+    // add_one_to_exp(leftTokens);
     rightTokens = split_by_minus(data[1]);
     // cout <<"size of leftTokens is "<<leftTokens.size()<<endl;
     // cout <<"LEFTTOKENS "<<endl;

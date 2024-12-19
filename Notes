@@ -49,3 +49,6 @@ weslt hena :
 //handle exceptions.
 
 ==> khas ila kan number 3ai
+
+//NOte : ta hadi khaski te3tabriha shiha : "5 + 4 * X + X^2= X^2"
+//if there is no coefficient , automatic 1 is considered the coeff.
