@@ -48,42 +48,7 @@ void ft_output()
     cout<<"The solution is: "<<endl;
 }
 
-// int ft_check_coefficient()
-// {
-// }
-// int ft_check_exponent()
-// {
-// }
 
-// int create_reduced_form(string str)
-// {
-//     vector<string> tokens;
-//     string token;
-//     std::istringstream ss(str);
-//     int flag = 0;
-//     while (std::getline(ss, token, ' ')) {
-//         if (flag == 1)
-//         {
-//             if (token == "0" || token == "1" || token == "2"
-//                 || token == "3" || token == "4" || token == "5" 
-//                 || token == "6" || token == "7" || token == "8" 
-//                 || token == "9")
-//                 {
-//                     cout <<"OK this is token|"<<token<<"|"<<endl;
-//                     tokens.push_back("-");
-
-//                 }
-//         }
-//         tokens.push_back(token);
-//         if (token == "=")
-//             flag++;
-//     }
-
-//     for (const auto& word : tokens) {
-//         std::cout << word << std::endl;
-//     }
-//     return 0;
-// }
 
 void split_by_space(string str)
 {
@@ -294,6 +259,7 @@ void get_expo(string str)
         ft_error(-2);
     }
 }
+
 //take the number jsk each the end of string or reach the star.
 //WESLT HENA 
 vector<pair<double, string>> check_format_expo_left(vector<string> data)
@@ -327,27 +293,26 @@ vector<pair<double, string>> check_format_expo_left(vector<string> data)
                 // get_expo(result);
                 //ban liya nezidha hena hadik case deyal  or %X2.
                 // // leftAll.push_back({1, result});
-                if (!str.empty())
-                {
-                //also may be wil be just the expo , and it is true, bcz I will predict the coeff is 1.
-                    if (str[0] == '%' || str[0] == '@')
-                    {
-                        // %X2 or @X2
-                        cout <<"INside str.substr(1)  "<<str.substr(1)<<endl;
-                        get_expo(str.substr(1));
-                        if (str[0] == '@')
-                            str[0] = '+';
-                        else if (str[0] == '%')
-                            str[0] = '-';
-                        // leftAll.push_back({'', str});
-                    }
-                }
-                else
-                {
+                // if (!str.empty())
+                // {
+                // //also may be wil be just the expo , and it is true, bcz I will predict the coeff is 1.
+                //     if (str[0] == '%' || str[0] == '@')
+                //     {
+                //         // %X2 or @X2
+                //         cout <<"INside str.substr(1)  "<<str.substr(1)<<endl;
+                //         get_expo(str.substr(1));
+                //         if (str[0] == '@')
+                //             str[0] = '+';
+                //         else if (str[0] == '%')
+                //             str[0] = '-';
+                //         leftAll.push_back({'1', str});
+                //     }
+                // }
+            
                 //SHOULD BE A NUMBER AND i WLL PREDICT THE X HAS 0 EXP.x^0
                     double numiro = get_number(str);
                     leftAll.push_back({numiro, ""});
-                }
+
             }
     }
     return leftAll;
@@ -364,7 +329,7 @@ void check_order_exp(vector<pair<double, string>> leftAll)
     {
         for (const auto& p : leftAll) {
             if (!p.second.empty()){
-                std::cout << "{ value :" << p.second.back() <@X2< "}" << std::endl;
+                std::cout << "{ value :" << p.second.back() << "}" << std::endl;
                 if (p.second.back() == 'X')
                     charExpo.push_back('1');
                 else
@@ -398,23 +363,97 @@ void check_order_exp(vector<pair<double, string>> leftAll)
 // add numbers with the same coefficients:
 // making the reduced form:
 
+//frt version
 // void calcul_tokens(vector<pair<double, string>> left, vector<pair<double, string>>right)
 // {
-//     // working on two vectors. 
-//     // calcul the keys that have the same value:
-    
-//     for (const auto& p : left) 
+//     cout<< "produce the reduced form "<<endl;
+//     for ( auto& p : left) 
 //     {
-//          if (!p.empty())
+//         for ( auto& l : left) 
 //         {
-//             if (!p.first.empty() && !p.second.empty())
+//             if (!l.second.empty()) 
 //             {
-//                 std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+//                     if ((p.second == l.second)) 
+//                     {
+//                         p.first = p.first + l.first;
+//                     }
+//                     else if ((p.second == "X^0" && l.second == "!") || 
+//                         (p.second == "!" && l.second == "X^0"))
+//                     {
+//                         p.first = p.first + l.first;
+//                     }
 //             }
 
 //         }
 //     }
 // }
+
+//second vers :
+void calcul_tokens(vector<pair<double, string>> &left, vector<pair<double, string>>right)
+{
+    cout<< "produce the reduced form "<<endl;
+    // for ( auto& p : left) 
+    // {
+    //     for ( auto& l : left) 
+    //     {
+    //         if (!l.second.empty()) 
+    //         {
+    //                 if ((p.second == l.second)) 
+    //                 {
+    //                     p.first = p.first + l.first;
+    //                 }
+    //                 else if ((p.second == "X^0" && l.second == "!") || 
+    //                     (p.second == "!" && l.second == "X^0"))
+    //                 {
+    //                     p.first = p.first + l.first;
+    //                 }
+    //         }
+
+    //     }
+    // }
+
+    for (auto it1 = left.begin(); it1 != left.end();)
+    {   
+        for (auto it2 = it1 + 1; it2 != left.end();)
+        {
+        
+                // if (!it1->second.empty() && !it2->second.empty()) 
+                // {
+                    cout <<"it1->second is "<<it1->second << " and it2->second is "<<it2->second<<endl;
+                    cout <<"1TRue or false "<<(it1->second == "X^0" && it2->second == "!") <<endl;
+                    cout <<"2TRue or false "<<(it1->second == "!" && it2->second  == "X^0") <<endl;
+
+                    if ((it1->second == it2->second)) 
+                    {
+                        cout <<"111111111111111111111111"<<endl;
+
+                        it1->first = it1->first + it2->first;
+                        cout <<"REsult is "<<it1->first<<endl;
+                        it2 = left.erase(it2);
+                    
+                    }
+                    else if ((it1->second == "X^0" && it2->second == "") || 
+                        (it1->second == "" && it2->second  == "X^0"))
+                    {
+                        cout <<"222222222222222222222222222222"<<endl;
+
+                        it1->first = it1->first + it2->first;
+                        cout <<"REsult is "<<it1->first<<endl;
+                     it2 = left.erase(it2);
+                    }
+                 else
+                    it2++;
+                // }
+        }
+        it1++;
+    }
+    // cout<< "after calcule and remove the form "<<endl;
+    // for (const auto& p : left) {
+    //     std::cout << "{" << p.first << ", " << p.second << "}\n";
+    // }
+}
+
+
 // //ila darti had tarika fash atbghi diri reduced from atl9ay rask zedty 1 --> so error.
 // %1*X^1
 // void add_one_to_exp(vector<string>  &tokens)
@@ -475,8 +514,7 @@ int main(int argc, char *argv[])
     // for (const auto& p : rightAll) {
     //     std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
     // }
-    //check order of expo :
-       //check order of expo :
+
     cout <<" --------------- Calling the fct check order exp "<<endl;
     check_order_exp(leftAll);
     check_order_exp(rightAll);
@@ -488,10 +526,15 @@ int main(int argc, char *argv[])
     for (const auto& p : rightAll) {
         std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
     }
+    calcul_tokens(leftAll, rightAll);
     // cout<<"*********** Second str "<<endl;
     // combine_all(leftTokens, rightTokens);
     // cout <<"Original string" <<argv[1]<<endl;
     // cout <<"Main Global degree is  |"<<degree<<"|"<<endl;
-
+    cout<< "after calcule and remove the form "<<endl;
+        for (const auto& p : leftAll) {
+        std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+    }
+    calcul_tokens(leftAll, rightAll);
     return 0;
 }
