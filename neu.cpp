@@ -406,7 +406,15 @@ void calcul_all_tokens(vector<pair<double, string>> &left, vector<pair<double, s
         left.push_back(std::make_pair((it2->first)*(-1), it2->second));
         it2++;
     }
-
+    for (auto it2 = left.begin(); it2 != left.end();)
+    {
+        if (it2->first == 0)
+        {
+            it2 = left.erase(it2);
+        }
+        else
+            it2++;
+    }
     // cout<< "after calcule and remove the form "<<endl;
     // for (const auto& p : left) {
     //     std::cout << "{" << p.first << ", " << p.second << "}\n";
@@ -476,6 +484,15 @@ void calcul_tokens(vector<pair<double, string>> &left)
 //         }
 //     }
 // }
+void output_reduced_form(vector<pair<double, string>> &left)
+{
+    vector<pair<double, string>> test;
+    //must concatenate the vector with the next.
+    for (auto it2 = left.begin(); it2 != left.end();)
+    {
+            it2++;
+    }
+}
 
 int main(int argc, char *argv[])
 {
@@ -543,6 +560,6 @@ int main(int argc, char *argv[])
         for (const auto& p : rightAll) {
         std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
     }
-    // combine_all(leftAll, rightAll);
+    output_reduced_form(leftAll, rightAll);
     return 0;
 }
