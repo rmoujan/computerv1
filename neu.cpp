@@ -363,54 +363,60 @@ void check_order_exp(vector<pair<double, string>> leftAll)
 // add numbers with the same coefficients:
 // making the reduced form:
 
-//frt version
-// void calcul_tokens(vector<pair<double, string>> left, vector<pair<double, string>>right)
-// {
-//     cout<< "produce the reduced form "<<endl;
-//     for ( auto& p : left) 
-//     {
-//         for ( auto& l : left) 
-//         {
-//             if (!l.second.empty()) 
-//             {
-//                     if ((p.second == l.second)) 
-//                     {
-//                         p.first = p.first + l.first;
-//                     }
-//                     else if ((p.second == "X^0" && l.second == "!") || 
-//                         (p.second == "!" && l.second == "X^0"))
-//                     {
-//                         p.first = p.first + l.first;
-//                     }
-//             }
-
-//         }
-//     }
-// }
-
-//second vers :
-void calcul_tokens(vector<pair<double, string>> &left, vector<pair<double, string>>right)
+void calcul_all_tokens(vector<pair<double, string>> &left, vector<pair<double, string>>&right)
 {
     cout<< "produce the reduced form "<<endl;
-    // for ( auto& p : left) 
-    // {
-    //     for ( auto& l : left) 
-    //     {
-    //         if (!l.second.empty()) 
-    //         {
-    //                 if ((p.second == l.second)) 
-    //                 {
-    //                     p.first = p.first + l.first;
-    //                 }
-    //                 else if ((p.second == "X^0" && l.second == "!") || 
-    //                     (p.second == "!" && l.second == "X^0"))
-    //                 {
-    //                     p.first = p.first + l.first;
-    //                 }
-    //         }
 
-    //     }
+    for (auto it1 = left.begin(); it1 != left.end();)
+    {   
+        for (auto it2 = right.begin(); it2 != right.end();)
+        {
+        
+                    cout <<"it1->second is "<<it1->second << " and it2->second is "<<it2->second<<endl;
+                    cout <<"1TRue or false "<<(it1->second == "X^0" && it2->second == "!") <<endl;
+                    cout <<"2TRue or false "<<(it1->second == "!" && it2->second  == "X^0") <<endl;
+                    if ((it1->second == it2->second)) 
+                    {
+                        cout <<"111111111111111111111111"<<endl;
+
+                        it1->first = it1->first + (it2->first * -1);
+                        cout <<"REsult is "<<it1->first<<endl;
+                        it2 = right.erase(it2);
+                    
+                    }
+                    else if ((it1->second == "X^0" && it2->second == "") || 
+                        (it1->second == "" && it2->second  == "X^0"))
+                    {
+                        cout <<"222222222222222222222222222222"<<endl;
+
+                        it1->first = it1->first + (it2->first  * - 1);
+                        cout <<"REsult is "<<it1->first<<endl;
+                     it2 = right.erase(it2);
+                    }
+                 else
+                    it2++;
+        }
+        it1++;
+    }
+    // add what's left in right to the left vector: 
+
+  
+    for (auto it2 = right.begin(); it2 != right.end();)
+    {
+        left.push_back(std::make_pair((it2->first)*(-1), it2->second));
+        it2++;
+    }
+
+    // cout<< "after calcule and remove the form "<<endl;
+    // for (const auto& p : left) {
+    //     std::cout << "{" << p.first << ", " << p.second << "}\n";
     // }
+}
+
+//second vers :
+void calcul_tokens(vector<pair<double, string>> &left)
+{
+    cout<< "produce the reduced form "<<endl;
 
     for (auto it1 = left.begin(); it1 != left.end();)
     {   
@@ -443,7 +449,6 @@ void calcul_tokens(vector<pair<double, string>> &left, vector<pair<double, strin
                     }
                  else
                     it2++;
-                // }
         }
         it1++;
     }
@@ -526,15 +531,18 @@ int main(int argc, char *argv[])
     for (const auto& p : rightAll) {
         std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
     }
-    calcul_tokens(leftAll, rightAll);
-    // cout<<"*********** Second str "<<endl;
-    // combine_all(leftTokens, rightTokens);
-    // cout <<"Original string" <<argv[1]<<endl;
-    // cout <<"Main Global degree is  |"<<degree<<"|"<<endl;
-    cout<< "after calcule and remove the form "<<endl;
+    calcul_tokens(leftAll);
+    calcul_tokens(rightAll);
+    calcul_all_tokens(leftAll, rightAll);
+    cout<< "LEFTALL after calcule and remove the form "<<endl;
         for (const auto& p : leftAll) {
         std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
     }
-    calcul_tokens(leftAll, rightAll);
+    cout <<"-----------------------------"<<endl;
+    cout<< "RIGHT ALL calcule and remove the form "<<endl;
+        for (const auto& p : rightAll) {
+        std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+    }
+    // combine_all(leftAll, rightAll);
     return 0;
 }
