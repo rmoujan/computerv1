@@ -484,14 +484,41 @@ void calcul_tokens(vector<pair<double, string>> &left)
 //         }
 //     }
 // }
+//weslt hena !!! khasni n concatini
 void output_reduced_form(vector<pair<double, string>> &left)
 {
-    vector<pair<double, string>> test;
+    string test= "";
+    string sign = "";
     //must concatenate the vector with the next.
-    for (auto it2 = left.begin(); it2 != left.end();)
+     std::stringstream ss;
+     cout <<"size of vector is "<<left.size()<<endl;
+    for (auto it = left.begin(); it != left.end();)
     {
-            it2++;
+        // cout <<"//// "<<it->first<<endl;
+        if (it->first > 0)
+        {
+            cout <<"//// "<<it->first<<endl;
+            sign = " + ";
+
+        }
+        else
+        {
+            cout <<"!!!!!! "<<it->first<<endl;
+            sign = " - ";
+        }
+
+        std::stringstream ss;
+        ss << (it->first);
+        std::string str = ss.str();
+        if (it == left.end() - 1)
+            sign = " = 0";
+        cout <<"str is "<<str<<endl;
+        //KAYN SHI PRLM F SIGN KHASNI NEGAD ORDER DEYAL HAD CONCATENATION
+        test +=sign + str + " * " + it->second;
+        it++;
+        sign = "";
     }
+    cout <<test<<endl;
 }
 
 int main(int argc, char *argv[])
@@ -560,6 +587,6 @@ int main(int argc, char *argv[])
         for (const auto& p : rightAll) {
         std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
     }
-    output_reduced_form(leftAll, rightAll);
+    output_reduced_form(leftAll);
     return 0;
 }
