@@ -52,3 +52,12 @@ weslt hena :
 
 //NOte : ta hadi khaski te3tabriha shiha : "5 + 4 * X + X^2= X^2"
 //if there is no coefficient , automatic 1 is considered the coeff.
+
+
+//dakshi li kay3tini : 
+5 * X^0 - 6 * X^1 - 0 * X^2 - 5.6 * X^3 = 0 
+//dakshi li kay3tiwhom homa : 
+5 * X^0 - 6 * X^1 + 0 * X^2 - 5.6 * X^3 = 0
+==>HANDLED
+//DEGREE
+//START CALCUL DELTA 

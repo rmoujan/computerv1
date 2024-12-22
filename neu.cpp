@@ -344,16 +344,18 @@ void check_order_exp(vector<pair<double, string>> leftAll)
         {
             cout <<"A: "<<c<<endl;
         }
-        if (std::is_sorted(charExpo.begin(), charExpo.end())) {
-            flag = 1;
-            auto maxIt = std::max_element(charExpo.begin(), charExpo.end());
-            if (*maxIt > degree)
-                degree = *maxIt;
-            cout <<"Max Degree is "<<*maxIt<<endl;
-        } else {
+        if ( !(std::is_sorted(charExpo.begin(), charExpo.end())) ) {
             ft_error(-6);
-            std::cout << "The vector is not sorted." << std::endl;
         }
+            // flag = 1;
+            // auto maxIt = std::max_element(charExpo.begin(), charExpo.end());
+            // if (*maxIt > degree)
+            //     degree = *maxIt;
+            // cout <<"Max Degree is "<<*maxIt<<endl;
+        // } else {
+        //     ft_error(-6);
+        //     // std::cout << "The vector is not sorted." << std::endl;
+        // }
 
     }
 }
@@ -406,15 +408,16 @@ void calcul_all_tokens(vector<pair<double, string>> &left, vector<pair<double, s
         left.push_back(std::make_pair((it2->first)*(-1), it2->second));
         it2++;
     }
-    for (auto it2 = left.begin(); it2 != left.end();)
-    {
-        if (it2->first == 0)
-        {
-            it2 = left.erase(it2);
-        }
-        else
-            it2++;
-    }
+    //must be added 
+    // for (auto it2 = left.begin(); it2 != left.end();)
+    // {
+    //     if (it2->first == 0)
+    //     {
+    //         it2 = left.erase(it2);
+    //     }
+    //     else
+    //         it2++;
+    // }
     // cout<< "after calcule and remove the form "<<endl;
     // for (const auto& p : left) {
     //     std::cout << "{" << p.first << ", " << p.second << "}\n";
@@ -466,26 +469,43 @@ void calcul_tokens(vector<pair<double, string>> &left)
     // }
 }
 
+void remove_zero_coeff(vector<pair<double, string>> &left)
+{
+    for (auto it2 = left.begin(); it2 != left.end();)
+    {
+        if (it2->first == 0)
+        {
+            it2 = left.erase(it2);
+        }
+        else
+            it2++;
+    }
+}
+void check_degree(vector<pair<double, string>> leftAll)
+{
+    cout <<"Global degree is  |"<<degree<<"|"<<endl;
+    std::vector<char> charExpo;
+    if (!leftAll.empty())
+    {
+        for (const auto& p : leftAll) {
+            if (!p.second.empty()){
+                std::cout << "{ value :" << p.second.back() << "}" << std::endl;
+                if (p.second.back() == 'X')
+                    charExpo.push_back('1');
+                else
+                    charExpo.push_back(p.second.back());
+            }
+        }
+    }
+    if (!charExpo.empty())
+    {
+        auto maxIt = std::max_element(charExpo.begin(), charExpo.end());
+        if (*maxIt > degree)
+            degree = *maxIt;
+    }
+}
 
-// //ila darti had tarika fash atbghi diri reduced from atl9ay rask zedty 1 --> so error.
-// %1*X^1
-// void add_one_to_exp(vector<string>  &tokens)
-// {
-//     int i = 0;
-//     for (const std::string& t : tokens)
-//     {
-//         if (!t.empty())
-//         {
-//             if (t[1] == 'X')
-//             {
-
-//             }
-//             cout <<"--" <<t[0]<<endl;
-//         }
-//     }
-// }
-//weslt hena !!! khasni n concatini
-void output_reduced_form(vector<pair<double, string>> &left)
+void output_reduced_form(vector<pair<double, string>> left)
 {
     string test= "";
     string sign = "";
@@ -497,7 +517,7 @@ void output_reduced_form(vector<pair<double, string>> &left)
         auto signPtr = it + 1;
         if (signPtr != left.end())
         {
-            if (signPtr->first > 0)
+            if (signPtr->first >= 0)
             {
                 cout <<"+signPtr "<<signPtr->first<<" and value is "<<signPtr->second<<endl;
                 sign = " + ";
@@ -524,11 +544,17 @@ void output_reduced_form(vector<pair<double, string>> &left)
         // if (it == left.end() - 1)
         //     sign = " = 0";
         //KAYN SHI PRLM F SIGN KHASNI NEGAD ORDER DEYAL HAD CONCATENATION
-        test +=str + " * " + it->second + sign;
+        if (!it->second.empty())
+        {
+            it->second = " * " + it->second;
+        }
+        test +=str + it->second + sign;
+        // else
+        //     test +=str + " * " + it->second + sign;
         it++;
         sign = "";
     }
-    cout <<"reduced form is "<<test<<" = 0 "<<endl;
+    cout <<"Reduced form: "<<test<<" = 0 "<<endl;
 }
 
 int main(int argc, char *argv[])
@@ -598,5 +624,13 @@ int main(int argc, char *argv[])
         std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
     }
     output_reduced_form(leftAll);
+    remove_zero_coeff(leftAll);
+    check_degree(leftAll);
+    cout <<"Polynomial degree: "<<degree<<endl;
+
+        cout<< "LEFTALL after calcule and remove the form "<<endl;
+        for (const auto& p : leftAll) {
+        std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+    }
     return 0;
 }
