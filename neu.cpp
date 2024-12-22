@@ -494,31 +494,41 @@ void output_reduced_form(vector<pair<double, string>> &left)
      cout <<"size of vector is "<<left.size()<<endl;
     for (auto it = left.begin(); it != left.end();)
     {
-        // cout <<"//// "<<it->first<<endl;
-        if (it->first > 0)
+        auto signPtr = it + 1;
+        if (signPtr != left.end())
         {
-            cout <<"//// "<<it->first<<endl;
-            sign = " + ";
+            if (signPtr->first > 0)
+            {
+                cout <<"+signPtr "<<signPtr->first<<" and value is "<<signPtr->second<<endl;
+                sign = " + ";
+
+            }
+            else
+            {
+                cout <<"-signPtr "<<signPtr->first<<" and value is "<<signPtr->second<<endl;
+                sign = " - ";
+                // it->first = it->first * (-1);
+            }
+        }
+        if (it->first < 0 && it != left.begin())
+        {
+            cout <<"it->first is negative "<<it->first<<endl;
+            it->first = it->first * (-1);
 
         }
-        else
-        {
-            cout <<"!!!!!! "<<it->first<<endl;
-            sign = " - ";
-        }
-
         std::stringstream ss;
         ss << (it->first);
         std::string str = ss.str();
-        if (it == left.end() - 1)
-            sign = " = 0";
-        cout <<"str is "<<str<<endl;
+        cout <<"str is "<<str<<" and sign is "<<sign<<endl;
+        
+        // if (it == left.end() - 1)
+        //     sign = " = 0";
         //KAYN SHI PRLM F SIGN KHASNI NEGAD ORDER DEYAL HAD CONCATENATION
-        test +=sign + str + " * " + it->second;
+        test +=str + " * " + it->second + sign;
         it++;
         sign = "";
     }
-    cout <<test<<endl;
+    cout <<"reduced form is "<<test<<" = 0 "<<endl;
 }
 
 int main(int argc, char *argv[])
