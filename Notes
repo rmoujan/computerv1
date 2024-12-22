@@ -61,3 +61,13 @@ weslt hena :
 ==>HANDLED
 //DEGREE
 //START CALCUL DELTA 
+
+equation:
+ax^2 + bx^1 + c = 0
+D=b^2−4*a*c
+
+6 - 9.3 * X^2 = 0
+DELTA =  -9.3 * 4 *6  
+
+
+//had case khaski te handliha : "5  + 1 * X^0 - 9.31 = 0"

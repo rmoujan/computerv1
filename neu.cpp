@@ -557,6 +557,55 @@ void output_reduced_form(vector<pair<double, string>> left)
     cout <<"Reduced form: "<<test<<" = 0 "<<endl;
 }
 
+double calculateSqrt(double n, double precision = 1e-6) {
+    if (n < 0) {
+        std::cerr << "Cannot calculate square root of a negative number.\n";
+        return -1;
+    }
+    double guess = n / 2.0; // Initial guess
+    double nextGuess;
+
+    while (true) {
+        nextGuess = (guess + n / guess) / 2.0; // Update guess using the formula
+        if (std::abs(nextGuess - guess) < precision) // Check if the approximation is close enough
+            break;
+        guess = nextGuess;
+    }
+    return nextGuess;
+}
+//if degree == 2
+//we calcul delta only if the equation is like : ax^2+bx^1+c=0
+void calcul_delta(vector<pair<double, string>> &leftAll)
+{
+    double a , b, c;
+    //a --> x^2
+    //b -- >x^1
+    //c --> x^0
+    cout<< "equation of two  "<<endl;
+    for (const auto& p : leftAll) {
+        std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+        if (p->second == "X^2")
+            a = p->first;
+        else if (p->second == "X^1" || p->second == "X")
+            b = p->first;
+        else
+            c = p->first;
+    }
+    double delta = (b*b) - (4 * a * c);
+    if (delta > 0)
+    {
+        double root1 = (-b + calculateSqrt(discriminant)) / (2 * a);
+        double root2 = (-b - calculateSqrt(discriminant)) / (2 * a);
+    }
+    else if (delta == 0)
+    {
+        double root = -b / (2 * a);
+    }
+    else
+    {
+
+    }
+}
 int main(int argc, char *argv[])
 {
     vector<pair<double, string>> leftAll;
@@ -627,10 +676,23 @@ int main(int argc, char *argv[])
     remove_zero_coeff(leftAll);
     check_degree(leftAll);
     cout <<"Polynomial degree: "<<degree<<endl;
+    if (degree > 50)
+    {
+        cout <<"The polynomial degree is strictly greater than 2, I can't solve."<<endl;
+    }
+    else
+    {
 
         cout<< "LEFTALL after calcule and remove the form "<<endl;
         for (const auto& p : leftAll) {
         std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+        }
+        if (degree == 50)
+            calcul_delta(leftAll);
+        else
+            cout <<" o or 1"<<endl;
     }
     return 0;
 }
+
+//calcul delta
