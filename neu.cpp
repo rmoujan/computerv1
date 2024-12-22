@@ -596,13 +596,21 @@ void calcul_delta(vector<pair<double, string>> &leftAll)
     {
         double root1 = (-b + calculateSqrt(discriminant)) / (2 * a);
         double root2 = (-b - calculateSqrt(discriminant)) / (2 * a);
+        cout <<"Discriminant is strictly positive, the two solutions are: "<<endl;
+        cout <<root1<<endl;
+        cout <<root2<<endl;
     }
     else if (delta == 0)
     {
+        cout <<"Discriminant is null, the solution is: "<<endl;
+
         double root = -b / (2 * a);
+        cout <<root1<<endl;
     }
     else
     {
+        //must calcul complex numbers.
+        cout <<"Discriminant is strictly negative, the two Complex solutions are: "<<endl;
 
     }
 }
