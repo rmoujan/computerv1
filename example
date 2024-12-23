@@ -4,17 +4,19 @@ CFLAGS= -Wall -Wextra -Werror
 RM = rm -f
 SRC=neu.cpp
 
-# OBJ = $(subst .c,.o,$(SRC))
+OBJ = $(subst .c,.o,$(SRC))
+
 all : $(NAME)
 
-$(NAME):
-	$(CC) neu.cpp -o $(NAME)
+$(NAME):${OBJ}
+	$(CC) $(OBJ) $(lib) -o $(NAME)
 
-neu.opp : neu.cpp
+%.o : %.c
 	@${CC} -c ${CFLAGS} $< -o $@
 
+
 clean:
-	$(RM) $(NAME) 
+	$(RM) $(OBJ) 
 
 fclean:clean
 	$(RM) $(NAME)

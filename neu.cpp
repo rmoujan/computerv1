@@ -622,8 +622,8 @@ void calcul_delta(vector<pair<double, string>> &leftAll)
         cout <<"Discriminant is strictly negative, the two Complex solutions are: "<<endl;
         double realPart = -b / (2 * a);
         double imagPart = calculateSqrt(-delta) / (2 * a);
-        std::cout << realPart << " + " << imagPart << "i, "<<endl;
-        std::cout << realPart << " - " << imagPart << "i" << std::endl;
+        std::cout << realPart << " + " << imagPart << "*i"<<endl;
+        std::cout << realPart << " - " << imagPart << "*i" << std::endl;
 
     }
 }
