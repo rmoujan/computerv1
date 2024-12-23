@@ -7,6 +7,8 @@
 #include <algorithm>
 using namespace std;
 //global variables.
+
+
 char degree='0';
 string reduced;
 int flag = 0;
@@ -41,28 +43,26 @@ void ft_error(int code)
         exit(0);
 }
 
-void ft_output()
-{
-    cout<<"Reduced form: "<<endl;
-    cout<<"Polynomial degree: "<<endl;
-    cout<<"The solution is: "<<endl;
-}
+// void ft_output()
+// {
+//     cout<<"Reduced form: "<<endl;
+//     cout<<"Polynomial degree: "<<endl;
+//     cout<<"The solution is: "<<endl;
+// }
 
 
 
 void split_by_space(string str)
 {
-
     vector<string> tokens;
     string token;
-    map<string, float> equation;
-    
-        std::istringstream tt(str);
-        while (tt >> token) {
-            cout<<"|"<<token<<"|"<<endl;
-            tokens.push_back(token);
-        }
-    // std::cout << "Size of the vector: " << tokens.size() << std::endl;
+
+    std::istringstream tt(str);
+    while (tt >> token)
+    {
+        // cout<<"|"<<token<<"|"<<endl;
+        tokens.push_back(token);
+    }
 }
 
 vector<string> split_by_equal(string str)
@@ -73,14 +73,10 @@ vector<string> split_by_equal(string str)
     std::istringstream ss(str);
 
     while (std::getline(ss, token, '=')){
-        // cout<<"|"<<token<<"|"<<endl;
         data.push_back(token);
     }
-
     if (data.size() != 2)
         ft_error(-2);
-
-    // cout <<"SIZE OF VECTOR IS "<<data.size()<<endl;
     return (data);
 }
 
@@ -89,7 +85,7 @@ int check_valid_char(string str)
 {
     int i = 0;
     int flag = 0;
-    // cout <<"Test check valid char"<<endl;
+
     while(str[i])
     {
         if (str[i] == '=')
@@ -99,14 +95,12 @@ int check_valid_char(string str)
                     || str[i] =='*' || str[i]== '^' 
                         || str[i] == 'X' || str[i] == ' ' || str[i] == '.') )
                     {
-                        // cout <<"|Inside check valid "<<str[i]<<"|"<<endl;
                         ft_error(-2);
                     }
         i++;
     }
     if (flag != 1)
         ft_error(-2);
-    // cout <<"after while"<<endl;
     return (1);
 }
 
@@ -115,6 +109,7 @@ vector<string> split_by_minus(string str)
     string token;
     vector<string> data;
     std::istringstream ss(str);
+
     cout<<"Split by MINUS  |"<<str<<"|"<<std::endl;
     while (std::getline(ss, token, '-')){
         cout<<"|"<<token<<"|"<<endl;
@@ -128,6 +123,7 @@ vector<string> split_vec_by_star(vector<string> vec)
 {
     string token;
     vector<string> data;
+
     for (string value: vec)
     {
         std::istringstream ss(value);
@@ -137,22 +133,22 @@ vector<string> split_vec_by_star(vector<string> vec)
             data.push_back(token);
         }
     }
-    cout <<" ********** After spliting by star :: "<<endl;
-    cout <<"size of vector "<<data.size();
-    cout <<"------------------------"<<endl;
-    for (string value:data)
-    {
-        cout <<"|"<<value<<"|"<<endl;
-    }
-    cout <<"-----------------------------"<<endl;
-    cout <<"Size of the original vec is "<<vec.size()<<endl;
-    //hadi ila zedtha , u ll nor handle the bonus
-    // if (vec.size() * 2 != data.size() && vec.size() != 1)
+    // cout <<" ********** After spliting by star :: "<<endl;
+    // cout <<"size of vector "<<data.size();
+    // cout <<"------------------------"<<endl;
+    // for (string value:data)
     // {
-    //     ft_error(-2);
+    //     cout <<"|"<<value<<"|"<<endl;
     // }
-    cout <<"FINAL "<<endl;
-    return data;
+    // cout <<"-----------------------------"<<endl;
+    // cout <<"Size of the original vec is "<<vec.size()<<endl;
+    // //hadi ila zedtha , u ll nor handle the bonus
+    // // if (vec.size() * 2 != data.size() && vec.size() != 1)
+    // // {
+    // //     ft_error(-2);
+    // // }
+    // cout <<"FINAL "<<endl;
+    return (data);
 }
 
 
@@ -164,7 +160,7 @@ string replace_with_minus(string str) {
         if (str[i] == '+')
         {
             str[i] = '-';
-            str.insert(i + 1, 1, '@');
+            str.insert(i + 1, 1, '@');//flag position
         }
         else if (str[i] == '-')
         {
@@ -172,13 +168,13 @@ string replace_with_minus(string str) {
         }
         i++;
     }
-    return str;
+    return (str);
 }
 
 string remove_space(string word)
 {
     word = regex_replace(word, regex(" "), "");
-    return word;
+    return (word);
 
 }
 
@@ -195,36 +191,31 @@ string flag_sign(string word)
     {
         if (word[i] == '=')
         {
-            // cout <<"==========|"<<word[i]<<"| and |"<<word[i + 1]<<"|"<<endl;
                 if (word[i + 1] == '+')
                 {
-                    // cout <<"=== et +++ "<<endl;
                     word[i + 1]='@';
                 }
                 else if (word[i + 1] == '-')
                 {
-                    // cout <<"=== et --- "<<endl;
                     word[i + 1]='%';
                 }
         }
         i++;
     }
-    return word;
+    return (word);
 }
 
-void combine_all(vector<string> leftTokens, vector<string> rightTokens)
-{
-    //store duplicate keys and unsorted :
-    std::vector<std::pair<int, std::string>> all;
+// void combine_all(vector<string> leftTokens, vector<string> rightTokens)
+// {
+//     //store duplicate keys and unsorted :
+//     std::vector<std::pair<int, std::string>> all;
 
-    std::vector<string> first;
-    std::vector<string> second;
+//     std::vector<string> first;
+//     std::vector<string> second;
 
-    // split_vec_by_star(leftTokens);
-    // split_vec_by_star(rightTokens);
-
-
-}
+//     // split_vec_by_star(leftTokens);
+//     // split_vec_by_star(rightTokens);
+// }
 
 double get_number(string str)
 {
@@ -235,10 +226,10 @@ double get_number(string str)
             str[0] = '-';
 
         double num = std::stod(str); // Attempt to convert
-        std::cout << "Integer: " << num << std::endl;
+        // std::cout << "Integer: " << num << std::endl;
         return num;
     } catch (const std::invalid_argument& e) {
-        cout <<"HON "<<endl;
+        // cout <<"HON "<<endl;
         ft_error(-3);
     } catch (const std::out_of_range& e) {
         ft_error(-4);
@@ -315,7 +306,7 @@ vector<pair<double, string>> check_format_expo_left(vector<string> data)
 
             }
     }
-    return leftAll;
+    return (leftAll);
 }
 
 
@@ -392,8 +383,9 @@ void calcul_all_tokens(vector<pair<double, string>> &left, vector<pair<double, s
                         cout <<"222222222222222222222222222222"<<endl;
 
                         it1->first = it1->first + (it2->first  * - 1);
+                        it1->second = "X^0";
                         cout <<"REsult is "<<it1->first<<endl;
-                     it2 = right.erase(it2);
+                        it2 = right.erase(it2);
                     }
                  else
                     it2++;
@@ -434,11 +426,11 @@ void calcul_tokens(vector<pair<double, string>> &left)
         for (auto it2 = it1 + 1; it2 != left.end();)
         {
         
-                // if (!it1->second.empty() && !it2->second.empty()) 
-                // {
-                    cout <<"it1->second is "<<it1->second << " and it2->second is "<<it2->second<<endl;
-                    cout <<"1TRue or false "<<(it1->second == "X^0" && it2->second == "!") <<endl;
-                    cout <<"2TRue or false "<<(it1->second == "!" && it2->second  == "X^0") <<endl;
+                // // if (!it1->second.empty() && !it2->second.empty()) 
+                // // {
+                //     cout <<"it1->second is "<<it1->second << " and it2->second is "<<it2->second<<endl;
+                //     cout <<"1TRue or false "<<(it1->second == "X^0" && it2->second == "!") <<endl;
+                //     cout <<"2TRue or false "<<(it1->second == "!" && it2->second  == "X^0") <<endl;
 
                     if ((it1->second == it2->second)) 
                     {
@@ -453,20 +445,16 @@ void calcul_tokens(vector<pair<double, string>> &left)
                         (it1->second == "" && it2->second  == "X^0"))
                     {
                         cout <<"222222222222222222222222222222"<<endl;
-
                         it1->first = it1->first + it2->first;
+                        it1->second = "X^0";
                         cout <<"REsult is "<<it1->first<<endl;
-                     it2 = left.erase(it2);
+                        it2 = left.erase(it2);
                     }
                  else
                     it2++;
         }
         it1++;
     }
-    // cout<< "after calcule and remove the form "<<endl;
-    // for (const auto& p : left) {
-    //     std::cout << "{" << p.first << ", " << p.second << "}\n";
-    // }
 }
 
 void remove_zero_coeff(vector<pair<double, string>> &left)
@@ -611,11 +599,9 @@ void calcul_delta(vector<pair<double, string>> &leftAll)
     }
     else
     {
-        //must calcul complex numbers.
         cout <<"Discriminant is strictly negative, the two Complex solutions are: "<<endl;
         double realPart = -b / (2 * a);
         double imagPart = calculateSqrt(-delta) / (2 * a);
-
         std::cout << realPart << " + " << imagPart << "i, "<<endl;
         std::cout << realPart << " - " << imagPart << "i" << std::endl;
 
@@ -662,24 +648,8 @@ int main(int argc, char *argv[])
     leftTokens = split_by_minus(data[0]);
     // add_one_to_exp(leftTokens);
     rightTokens = split_by_minus(data[1]);
-    // cout <<"size of leftTokens is "<<leftTokens.size()<<endl;
-    // cout <<"LEFTTOKENS "<<endl;
-    // for (string value:leftTokens)
-    // {
-    //     cout <<"{"<<value[0]<<"}"<<endl;
-    // }
     leftAll = check_format_expo_left(leftTokens);
     rightAll = check_format_expo_left(rightTokens);
-    // Display the vector
-    // cout <<"OUTPUT THE Left VECTOR WITH KEY/VALUE "<<endl;
-    // for (const auto& p : leftAll) {
-    //     std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
-    // }
-    // cout <<"OUTPUT THE Right VECTOR WITH KEY/VALUE "<<endl;
-    // for (const auto& p : rightAll) {
-    //     std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
-    // }
-
     cout <<" --------------- Calling the fct check order exp "<<endl;
     check_order_exp(leftAll);
     check_order_exp(rightAll);
@@ -713,7 +683,6 @@ int main(int argc, char *argv[])
     }
     else
     {
-
         cout<< "LEFTALL after calcule and remove the form "<<endl;
         for (const auto& p : leftAll) {
         std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
@@ -740,5 +709,3 @@ int main(int argc, char *argv[])
     }
     return 0;
 }
-
-//calcul delta

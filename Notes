@@ -70,4 +70,16 @@ D=b^2−4*a*c
 DELTA =  -9.3 * 4 *6  
 
 
-//had case khaski te handliha : "5  + 1 * X^0 - 9.31 = 0"
+//had case khaski te handliha : `"5  + 1 * X^0 - 9.31 = 0"`
+
+//add cases d bns  free etries and intermediate
+//check leaks and segf
+//test page correc
+//makefile
+//push
+
+//CASES :
+// had case "5  + 1 * X^0  = 0" katir X^0 KHASHA TB9A !!!! DONE
+//khasni n handli had case : "5 + 4 * X + X^2= X^2"
+
+// note : to test leaks with program : valgrind --leak-check=full ./a.out "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0"
