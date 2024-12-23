@@ -109,13 +109,30 @@ vector<string> split_by_minus(string str)
     string token;
     vector<string> data;
     std::istringstream ss(str);
-
+    // string newTkn;
     cout<<"Split by MINUS  |"<<str<<"|"<<std::endl;
-    while (std::getline(ss, token, '-')){
-        cout<<"|"<<token<<"|"<<endl;
+    while (std::getline(ss, token, '-'))
+    {
+        cout<<"{} |"<<token<<"|"<<endl;
+        //add 1 * token  binsba ltoken that hasn't a coeff
+        //hadsh li zedt bash n handli case d bns , ms still hadi =X^2
+        if (token.substr(0, 2) == "%X" || token.substr(0, 2) == "@X")
+        {
+            cout <<"just the coeff |"<<token.substr(0, 2) <<"|"<<endl;
+            //must add between @ and X the 1 , but I must flag it.
+            //hena fin kayn error, cuz substr matspltas zn.
+            // %X^3
+            token  = token.substr(0, 1) + "1*" +token.substr(1);
+            cout <<"########## |"<<token<<"|"<<endl;
+        }
+        else if (token.substr(0, 1) == "X")
+        {
+            token  = "1*" +token;
+            cout <<"~~~~~~~~~~~~~~~~~~  |"<<token<<"|"<<endl;
+        }
         data.push_back(token);
     }
-    return data;
+    return (data);
 }
 
 
@@ -199,6 +216,10 @@ string flag_sign(string word)
                 {
                     word[i + 1]='%';
                 }
+                // else if (word[i + 1] == 'X')
+                // {
+                //     word[i + 1]='@';
+                // }
         }
         i++;
     }
@@ -255,7 +276,7 @@ void get_expo(string str)
 //WESLT HENA 
 vector<pair<double, string>> check_format_expo_left(vector<string> data)
 {
-    int i = 0;
+    // int i = 0;
     double number;
     vector<pair<double, string>> leftAll;//like map but hold duplicated keys and unorder
     // int key, 
@@ -286,7 +307,7 @@ vector<pair<double, string>> check_format_expo_left(vector<string> data)
                 // // leftAll.push_back({1, result});
                 // if (!str.empty())
                 // {
-                // //also may be wil be just the expo , and it is true, bcz I will predict the coeff is 1.
+                // //also may be will be just the expo , and it is true, bcz I will predict the coeff is 1.
                 //     if (str[0] == '%' || str[0] == '@')
                 //     {
                 //         // %X2 or @X2
@@ -303,7 +324,6 @@ vector<pair<double, string>> check_format_expo_left(vector<string> data)
                 //SHOULD BE A NUMBER AND i WLL PREDICT THE X HAS 0 EXP.x^0
                     double numiro = get_number(str);
                     leftAll.push_back({numiro, ""});
-
             }
     }
     return (leftAll);
@@ -426,11 +446,11 @@ void calcul_tokens(vector<pair<double, string>> &left)
         for (auto it2 = it1 + 1; it2 != left.end();)
         {
         
-                // // if (!it1->second.empty() && !it2->second.empty()) 
-                // // {
-                //     cout <<"it1->second is "<<it1->second << " and it2->second is "<<it2->second<<endl;
-                //     cout <<"1TRue or false "<<(it1->second == "X^0" && it2->second == "!") <<endl;
-                //     cout <<"2TRue or false "<<(it1->second == "!" && it2->second  == "X^0") <<endl;
+                //if (!it1->second.empty() && !it2->second.empty()) 
+                //{
+                //cout <<"it1->second is "<<it1->second << " and it2->second is "<<it2->second<<endl;
+                //cout <<"1TRue or false "<<(it1->second == "X^0" && it2->second == "!") <<endl;
+                //cout <<"2TRue or false "<<(it1->second == "!" && it2->second  == "X^0") <<endl;
 
                     if ((it1->second == it2->second)) 
                     {
@@ -648,6 +668,7 @@ int main(int argc, char *argv[])
     leftTokens = split_by_minus(data[0]);
     // add_one_to_exp(leftTokens);
     rightTokens = split_by_minus(data[1]);
+    cout <<"###################"<<endl;
     leftAll = check_format_expo_left(leftTokens);
     rightAll = check_format_expo_left(rightTokens);
     cout <<" --------------- Calling the fct check order exp "<<endl;

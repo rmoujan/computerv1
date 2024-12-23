@@ -4,24 +4,18 @@ CFLAGS= -Wall -Wextra -Werror
 RM = rm -f
 SRC=neu.cpp
 
-
-# OBJ = $(subst .c,.o,$(SRC))
-# OBJBNS = $(subst .c,.o,$(SRCBNS))
-# lib = ./libft/libft.a
-# libobj = ./libft/*.o
-
 all : $(NAME)
 
-$(NAME):${SRC}
-	$(CC) $(SRC) -o $(NAME)
+$(NAME):
+	$(CC) neu.cpp -o $(NAME)
 
-%.o : %.c
+neu.o : neu.cpp
 	@${CC} -c ${CFLAGS} $< -o $@
 
 clean:
-	$(RM) $(OBJ) $(OBJBNS) $(libobj)
+	$(RM) $(NAME) 
 
 fclean:clean
-	$(RM) $(NAME) $(NAME2) $(lib)
+	$(RM) $(NAME)
 	
 re:fclean all
