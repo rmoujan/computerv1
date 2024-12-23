@@ -559,20 +559,22 @@ void output_reduced_form(vector<pair<double, string>> left)
 
 double calculateSqrt(double n, double precision = 1e-6) {
     if (n < 0) {
-        std::cerr << "Cannot calculate square root of a negative number.\n";
+        std::cerr << "Square root of negative numbers is undefined for real numbers.\n";
         return -1;
     }
-    double guess = n / 2.0; // Initial guess
-    double nextGuess;
+    double low = 0, high = n, mid;
 
-    while (true) {
-        nextGuess = (guess + n / guess) / 2.0; // Update guess using the formula
-        if (std::abs(nextGuess - guess) < precision) // Check if the approximation is close enough
-            break;
-        guess = nextGuess;
+    while (high - low > precision) {
+        mid = (low + high) / 2.0;
+        if (mid * mid > n) {
+            high = mid; // Narrow the range to the lower half
+        } else {
+            low = mid; // Narrow the range to the upper half
+        }
     }
-    return nextGuess;
+    return (low + high) / 2.0;
 }
+
 //if degree == 2
 //we calcul delta only if the equation is like : ax^2+bx^1+c=0
 void calcul_delta(vector<pair<double, string>> &leftAll)
@@ -584,18 +586,18 @@ void calcul_delta(vector<pair<double, string>> &leftAll)
     cout<< "equation of two  "<<endl;
     for (const auto& p : leftAll) {
         std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
-        if (p->second == "X^2")
-            a = p->first;
-        else if (p->second == "X^1" || p->second == "X")
-            b = p->first;
+        if (p.second == "X^2")
+            a = p.first;
+        else if (p.second == "X^1" || p.second == "X")
+            b = p.first;
         else
-            c = p->first;
+            c = p.first;
     }
     double delta = (b*b) - (4 * a * c);
     if (delta > 0)
     {
-        double root1 = (-b + calculateSqrt(discriminant)) / (2 * a);
-        double root2 = (-b - calculateSqrt(discriminant)) / (2 * a);
+        double root1 = (-b + calculateSqrt(delta)) / (2 * a);
+        double root2 = (-b - calculateSqrt(delta)) / (2 * a);
         cout <<"Discriminant is strictly positive, the two solutions are: "<<endl;
         cout <<root1<<endl;
         cout <<root2<<endl;
@@ -605,15 +607,36 @@ void calcul_delta(vector<pair<double, string>> &leftAll)
         cout <<"Discriminant is null, the solution is: "<<endl;
 
         double root = -b / (2 * a);
-        cout <<root1<<endl;
+        cout <<root<<endl;
     }
     else
     {
         //must calcul complex numbers.
         cout <<"Discriminant is strictly negative, the two Complex solutions are: "<<endl;
+        double realPart = -b / (2 * a);
+        double imagPart = calculateSqrt(-delta) / (2 * a);
+
+        std::cout << realPart << " + " << imagPart << "i, "<<endl;
+        std::cout << realPart << " - " << imagPart << "i" << std::endl;
 
     }
 }
+
+void equation_degrre1(vector<pair<double, string>> &leftAll)
+{
+    double a, b;
+
+    for (const auto& p : leftAll) {
+        std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+        if (p.second == "X^1" || p.second == "X")
+            a = p.first;
+        else
+            b = p.first;
+    }
+    cout <<"The solution is:"<<endl;
+    cout<<(-b)/a<<endl;
+}
+
 int main(int argc, char *argv[])
 {
     vector<pair<double, string>> leftAll;
@@ -697,8 +720,23 @@ int main(int argc, char *argv[])
         }
         if (degree == 50)
             calcul_delta(leftAll);
+        else if(degree == 49)
+        {
+            cout <<" 111111111 "<<endl;
+            equation_degrre1(leftAll);
+        }
+        else if(degree == 48)
+        {
+            cout <<" 000000000 "<<endl;
+        for (const auto& p : leftAll)
+        {
+            std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+        }
+        if (leftAll.size() == 0)
+            cout <<"The equation is always true and has infinitely many solutions."<<endl;
         else
-            cout <<" o or 1"<<endl;
+            cout <<"The equation is false, so there are no solutions.."<<endl;
+        }
     }
     return 0;
 }
