@@ -86,4 +86,34 @@ DELTA =  -9.3 * 4 *6
 
 
 
-///khasni nedir inetrmediate steps. !!!
+/// khasni nedir inetrmediate steps. !!!
+/// tests cases with number kebar
+// check seg and leaks
+// page de correction
+//clean ur code
+//understand makefile and push
+
+// afternooon:
+// start learning react to build matcha
+//or python.
+
+
+//Note:
+// Reduced equation form
+
+// The reduced equation shows the factors until the non null last one, only
+// once, and either side of the equation is null.
+// ==>means ila kan last coeff is 0 makhasosh yekon 
+
+// ./a.out "5 * X^0 + 3 * X^1 + 3 * X^2 = 1 * X^0 + 0 * X^5"
+// Error : Unexpected Format !!!
+
+// this case :not worked
+// ./a.out "5* X^1 + 3 * X^1 + 3 * X^2 = -5544 * X +  X^45"
+// Reduced form: 8 * X^1 + 3 * X^2 + 5544 * X - 1 * X^45 = 0 
+// Polynomial degree: 5
+
+//this case also = ./a.out "+ 3 * X + 3 * X = 0".
+
+// this case also : 8 * X^1 + 3 * X^2 + 5544 * X - 1 * X^4 = 0 Fixed
+// this case : "8 * X^1 + 3 * X^1 + 5544 * X - 1 * X^1 = 0" and 11 * X^1 - 2 * X = 0 Fixed
