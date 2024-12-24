@@ -1,20 +1,22 @@
-NAME=computorv1
+NAME=computor
 CC=c++
 CFLAGS= -Wall -Wextra -Werror
 RM = rm -f
-SRC=neu.cpp
+SRC=neu.cpp\
+	tools.cpp\
 
-# OBJ = $(subst .c,.o,$(SRC))
+OBJ = $(subst .cpp,.opp,$(SRC))
+
 all : $(NAME)
 
-$(NAME):
-	$(CC) neu.cpp -o $(NAME)
+$(NAME):${OBJ}
+	$(CC) $(OBJ) -o $(NAME)
 
-neu.opp : neu.cpp
+%.opp : %.cpp
 	@${CC} -c ${CFLAGS} $< -o $@
 
 clean:
-	$(RM) $(NAME) 
+	$(RM) $(OBJ)
 
 fclean:clean
 	$(RM) $(NAME)
