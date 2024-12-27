@@ -1,7 +1,6 @@
 #include "help.hpp"
 char degree = '0';
 
-
 void check_order_exp(vector<pair<double, string>> leftAll)
 {
     std::vector<char> charExpo;
@@ -21,12 +20,12 @@ void check_order_exp(vector<pair<double, string>> leftAll)
             }
         }
     }
-    if (!charExpo.empty())
-    {
-        if ( !(std::is_sorted(charExpo.begin(), charExpo.end())) ) {
-            ft_error(-6);
-        }
-    }
+    // if (!charExpo.empty())
+    // {
+    //     if ( !(std::is_sorted(charExpo.begin(), charExpo.end())) ) {
+    //         ft_error(-6);
+    //     }
+    // }
 }
 
 void calcul_all_tokens(vector<pair<double, string>> &left, vector<pair<double, string>>&right)
@@ -282,9 +281,13 @@ void calcul_delta(vector<pair<double, string>> &leftAll)
     {
         cout <<"Discriminant is strictly negative, the two Complex solutions are: "<<endl;
         double realPart = -b / (2 * a);
-        double imagPart = calculateSquareRoot(-delta) / (2 * a);
-        std::cout << realPart << " + " << imagPart << "*i"<<endl;
-        std::cout << realPart << " - " << imagPart << "*i" << std::endl;
+        double imagPart = calculateSquareRoot((delta * -1)) / (2 * a);
+        //cout <<"imagPart is "<<imagPart<<endl;
+         if (imagPart < 0)
+                imagPart *=-1;
+            std::cout << realPart << " + " << (imagPart ) << " * i"<<endl;
+        // if (-imagPart < 0)
+            std::cout << realPart <<  " - "  << (imagPart)<< " * i" << std::endl;
     }
 }
 
@@ -311,8 +314,18 @@ void equation_degrre1(vector<pair<double, string>> &leftAll)
             b = p.first;
         }
     }
-    cout <<"\t\t\t"<<a<<" * X = "<<-b<<endl;
-    cout <<"\t\t\tX = "<<-b<<"/"<<a<<endl<<endl;
+    if (b == 0)
+    {
+        cout <<"\t\t\t\t"<<a<<" * X   = "<<b<<endl;
+        cout <<"\t\t\t\tX       = "<<b<<"/"<<a<<endl<<endl;
+
+    }
+    else
+    {
+        cout <<"\t\t\t"<<a<<" * X   = "<<-b<<endl;
+        cout <<"\t\t\tX = "<<-b<<"/"<<a<<endl<<endl;
+
+    }
     // cout <<"The solution is: "<<(-b)/a<<endl<<endl;
     cout << "-----------------------------------------" << endl;
     cout << "| Solution: X =                          |" << (-b)/a <<endl;
