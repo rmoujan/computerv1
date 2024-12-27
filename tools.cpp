@@ -1,4 +1,4 @@
-#include "help.cpp"
+#include "help.hpp"
 
 void ft_error(int code)
 {

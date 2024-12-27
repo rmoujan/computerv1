@@ -1,4 +1,4 @@
-#include "help.cpp"
+#include "help.hpp"
 char degree = '0';
 
 
@@ -14,6 +14,10 @@ void check_order_exp(vector<pair<double, string>> leftAll)
                     charExpo.push_back('1');
                 else
                     charExpo.push_back(p.second.back());
+            }
+            else if (p.first)
+            {
+                charExpo.push_back('0');
             }
         }
     }
@@ -174,54 +178,94 @@ void output_reduced_form(vector<pair<double, string>> left)
         it++;
         sign = "";
     }
-    cout <<endl<<"Reduced form: "<<test<<" = 0 "<<endl;
+    if(test.empty())
+    {
+        cout <<endl<<"Reduced form: 0 = 0 "<<endl;
+    }
+    else
+        cout <<endl<<"Reduced form: "<<test<<" = 0 "<<endl;
 }
 
-double calculateSqrt(double n, double precision = 1e-6) 
-{
-    if (n < 0) {
-        std::cerr << "Square root of negative numbers is undefined for real numbers.\n";
+// double calculateSqrt(double number) {
+//     if (number < 0) {
+//         cout << "Square root of negative numbers is not defined for integers!" << endl;
+//         return -1;
+//     }
+    
+//     double low = 0, high = number, result = 0;
+
+//     while (low <= high) {
+//         double mid = low + (high - low) / 2;
+
+//         // Check if mid*mid is less than or equal to number
+//         if (mid * mid <= number) {
+//             result = mid; // Store the mid as the answer
+//             low = mid + 1;
+//         } else {
+//             high = mid - 1;
+//         }
+//     }
+
+//     return result;
+// }
+
+double calculateSquareRoot(double number) {
+    if (number < 0) {
+        cout << "Square root of negative numbers is not real!" << endl;
         return -1;
     }
-    double low = 0, high = n, mid;
 
-    while (high - low > precision) {
-        mid = (low + high) / 2.0;
-        if (mid * mid > n) {
-            high = mid;
-        } else {
-            low = mid;
+    double guess = number;  // Initial guess
+    double epsilon = 0.00001; // Desired precision
+
+    while (true) {
+        double nextGuess = 0.5 * (guess + number / guess);
+        if (abs(guess - nextGuess) < epsilon) {
+            break;
         }
+        guess = nextGuess;
     }
-    return (low + high) / 2.0;
+
+    return guess;
 }
+
 
 //if degree == 2
 //we calcul delta only if the equation is like : ax^2+bx^1+c=0
 void calcul_delta(vector<pair<double, string>> &leftAll)
 {
-    double a , b, c;
+    double a = 0 , b = 0, c = 0;
     //a --> x^2
     //b -- >x^1
     //c --> x^0
     for (const auto& p : leftAll) {
         if (p.second == "X^2")
-            a = p.first;
+        {
+            if (p.first)
+                a = p.first;
+        }
         else if (p.second == "X^1" || p.second == "X")
-            b = p.first;
+        {
+            if (p.first)
+                b = p.first;
+        }
         else
-            c = p.first;
+        {
+            if (p.first)
+                c = p.first;
+        }
     }
+    // cout <<"a is "<<a<<" and b is "<<b<< " and c is "<<c<<endl;
     double delta = (b*b) - (4 * a * c);        
 
-    cout <<endl<<"---------------- Starting calcule DELTA ----------------"<<endl<<endl;
-    cout <<"DELTA = ("<<b<<" * "<<b<<") - "<<"(4 * "<<a<<" * "<<c<<")"<<endl;
-    cout <<"DELTA = "<<(b*b) - (4 * a * c)<<endl<<endl;
+    cout <<endl<<"---------------- Starting to calculate DELTA ----------------"<<endl<<endl;
+    cout <<"Δ = ("<<b<<" * "<<b<<") - "<<"(4 * "<<a<<" * "<<c<<")"<<endl;
+    cout <<"Δ = "<<(b*b) - (4 * a * c)<<endl<<endl;
 
     if (delta > 0)
     {
-        double root1 = (-b + calculateSqrt(delta)) / (2 * a);
-        double root2 = (-b - calculateSqrt(delta)) / (2 * a);
+        double root1 = (-b + calculateSquareRoot(delta)) / (2 * a);
+        double root2 = (-b - calculateSquareRoot(delta)) / (2 * a);
         cout <<"Discriminant is strictly positive, the two solutions are: "<<endl<<endl;
         cout <<root1<<endl;
         cout <<root2<<endl;
@@ -238,7 +282,7 @@ void calcul_delta(vector<pair<double, string>> &leftAll)
     {
         cout <<"Discriminant is strictly negative, the two Complex solutions are: "<<endl;
         double realPart = -b / (2 * a);
-        double imagPart = calculateSqrt(-delta) / (2 * a);
+        double imagPart = calculateSquareRoot(-delta) / (2 * a);
         std::cout << realPart << " + " << imagPart << "*i"<<endl;
         std::cout << realPart << " - " << imagPart << "*i" << std::endl;
     }
@@ -246,16 +290,33 @@ void calcul_delta(vector<pair<double, string>> &leftAll)
 
 void equation_degrre1(vector<pair<double, string>> &leftAll)
 {
-    double a, b;
+    double a = 0, b = 0;
 
+    // cout<< "^^^^^^^ Equation 1 Degree ^^^^^^^^^^^^^^"<<endl;
+    //     for (const auto& p : leftAll) {
+    //     std::cout << "{" << p.first << ", " << p.second << "}" << std::endl;
+    // }
+    cout <<endl<< "-----------------------------------------" << endl;
+    cout << "| Solving the equation step by step     |" << endl;
+    cout << "-----------------------------------------" << endl<<endl;
     for (const auto& p : leftAll) {
         if (p.second == "X^1" || p.second == "X")
+        {
+            // cout <<"@@ p.first is "<<p.first<<endl;
             a = p.first;
+        }
         else
+        {
+            //  cout <<"## p.first is "<<p.first<<endl;
             b = p.first;
+        }
     }
-
-    cout <<"The solution is: "<<-b<<" / " <<a<< " =====> " <<(-b)/a<<endl;
+    cout <<"\t\t\t"<<a<<" * X = "<<-b<<endl;
+    cout <<"\t\t\tX = "<<-b<<"/"<<a<<endl<<endl;
+    // cout <<"The solution is: "<<(-b)/a<<endl<<endl;
+    cout << "-----------------------------------------" << endl;
+    cout << "| Solution: X =                          |" << (-b)/a <<endl;
+    cout << "-----------------------------------------\n";
 }
 
 
@@ -293,7 +354,7 @@ int main(int argc, char *argv[])
     cout <<endl<<"Polynomial degree: "<<degree<<endl;
     if (degree > 50)
     {
-        cout <<"The polynomial degree is strictly greater than 2, I can't solve."<<endl;
+        cout <<endl<<"The polynomial degree is strictly greater than 2, I can't solve."<<endl;
     }
     else
     {
@@ -306,9 +367,9 @@ int main(int argc, char *argv[])
         else if(degree == 48)
         {
         if (leftAll.size() == 0)
-            cout <<"The equation is always true and has infinitely many solutions."<<endl;
+            cout <<endl<<"The equation is always true and has infinitely many solutions."<<endl;
         else
-            cout <<"The equation is false, so there are no solutions.."<<endl;
+            cout <<endl<<"The equation is false, so there are no solutions.."<<endl;
         }
     }
     return 0;

@@ -1,0 +1,133 @@
+you should calcul delta
+delta > 0 ---> give us two solutions
+delta == 0 --->give us one solution
+delta < 0 --->does not have solution
+
+**DEfinition :
+A polynomial is an expression consisting of variables (also called indeterminates),
+coefficients, and exponents that are non-negative integers. 
+**General Form of a polynomial:
+P(x) = ax^(n) + bx^(n-1) + cx^(n - 2) ... 
+
+** constraintes :
+1- Write a program that solves a polynomial second or lower degree equation.
+2- Every term respect the form (a ∗ x^p)
+3-  I dont get very well this : (You should also think of zero, negative or non whole coefficients)
+==>means mo3amil y9de yekon zero wela negative number wela 3adad ghayr sa7i7 (b7al kosor , jodor, 3adad 3ashari)
+
+
+
+// the expected format : "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0"
+
+
+1-split by equal =
+2- split by space (addih)
+
+// output the left and right sides of equation :
+ "7*X^2 + 3*X^1 + 1*X^3 - 6*X^2 + 8 * X = 7*X^0 - 7*X^3 + 8"
+OUTPUT THE Left VECTOR WITH KEY/VALUE
+
+{7, X^2}
+{3, X^1}
+{1, X^3}
+{6, X^2}
+{8, X}
+OUTPUT THE Right VECTOR WITH KEY/VALUE 
+{7, X^0}
+{7, X^3}
+{8, }
+
+**steps needed :
+//declare an array of chars  and fill it with the last char in each vector.
+//wash n filli array of chars then nshof wash sorted or not
+//yes bash t cheki ta right side and pick the greates one.
+//and save the greates in the degree
+weslt hena :
+//then switch the right to left (with calcul and pay attention to sign)
+//make the reduced form
+//calcul delta
+//handle exceptions.
+
+==> khas ila kan number 3ai
+
+//NOte : ta hadi khaski te3tabriha shiha : "5 + 4 * X + X^2= X^2"
+//if there is no coefficient , automatic 1 is considered the coeff.
+
+
+//dakshi li kay3tini : 
+5 * X^0 - 6 * X^1 - 0 * X^2 - 5.6 * X^3 = 0 
+//dakshi li kay3tiwhom homa : 
+5 * X^0 - 6 * X^1 + 0 * X^2 - 5.6 * X^3 = 0
+==>HANDLED
+//DEGREE
+//START CALCUL DELTA 
+
+equation:
+ax^2 + bx^1 + c = 0
+D=b^2−4*a*c
+
+6 - 9.3 * X^2 = 0
+DELTA =  -9.3 * 4 *6  
+
+
+//had case khaski te handliha : `"5  + 1 * X^0 - 9.31 = 0"`
+
+//add cases d bns  free etries and intermediate (had steps still need)
+//check leaks and segf still
+//test page correc
+//makefile
+//push
+
+//CASES :
+// had case "5  + 1 * X^0  = 0" katir X^0 KHASHA TB9A !!!! DONE
+//khasni n handli had case : "5 + 4 * X + X^2= X^2" done
+
+// note : to test leaks with program : valgrind --leak-check=full ./a.out "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0"
+
+
+
+/// khasni nedir inetrmediate steps. !!!
+/// tests cases with number kebar
+// check seg and leaks
+// page de correction
+//clean ur code
+//understand makefile and push
+
+// afternooon:
+// start learning react to build matcha
+//or python.
+
+
+//Note:
+// Reduced equation form
+
+// The reduced equation shows the factors until the non null last one, only
+// once, and either side of the equation is null.
+// ==>means ila kan last coeff is 0 makhasosh yekon 
+
+// ./a.out "5 * X^0 + 3 * X^1 + 3 * X^2 = 1 * X^0 + 0 * X^5"
+// Error : Unexpected Format !!!
+
+// this case :not worked
+// ./a.out "5* X^1 + 3 * X^1 + 3 * X^2 = -5544 * X +  X^45"
+// Reduced form: 8 * X^1 + 3 * X^2 + 5544 * X - 1 * X^45 = 0 
+// Polynomial degree: 5
+
+//this case also = ./a.out "+ 3 * X + 3 * X = 0".
+
+// this case also : 8 * X^1 + 3 * X^2 + 5544 * X - 1 * X^4 = 0 Fixed
+// this case : "8 * X^1 + 3 * X^1 + 5544 * X - 1 * X^1 = 0" and 11 * X^1 - 2 * X = 0 Fixed
+
+
+//belan deyal expo are not orgnized !!!!!!!!!!!!!!!!!
+
+// had case kaydwezha o makygolsh expo aren't orgnized : "15^1 + 3 + 9 * X = 10 * X^1 + 8 * X^1"
+//ALSO HADI "15^1 + 3 *X^0 + 9 * X^0 = 10 * X^1 + 8 * X^1"
+
+//khasni n handli had case : "15X^545 + 3 *X^0 + 9 * X^0 = 10 * X^1 + 8 * X^1"
+// ==> f atoi makhshaash dewzha
+//nezid neteste with larg numbers/
+//ngad design of inter steps
+
+
+//beday python.
