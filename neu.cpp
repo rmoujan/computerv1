@@ -263,41 +263,68 @@ void calcul_delta(vector<pair<double, string>> &leftAll)
 
     if (delta > 0)
     {
-        double root1 = (-b + calculateSquareRoot(delta)) / (2 * a);
-        double root2 = (-b - calculateSquareRoot(delta)) / (2 * a);
         cout <<"Discriminant is strictly positive, the two solutions are: "<<endl<<endl;
-        cout <<root1<<endl;
-        cout <<root2<<endl;
+        cout <<"X1 = ("<<-b<<" + \u221A("<<delta<<")) / ("<<2 <<" * "<<a<<")"<<endl;
+        cout <<"X1 = ("<<-b<<" + ("<<calculateSquareRoot(delta)<<")) / ("<<2 * a <<")"<<endl; 
+        cout <<"X1 =  "<<(-b + calculateSquareRoot(delta)) / (2 * a)<<endl<<endl; 
+        
+
+        cout <<"X2 = ("<<-b<<" - \u221A("<<delta<<")) / ("<<2 <<" * "<<a<<")"<<endl;
+        cout <<"X2 = ("<<-b<<" - ("<<calculateSquareRoot(delta)<<")) / ("<<2 * a <<")"<<endl; 
+        cout <<"X2 =  "<<(-b - calculateSquareRoot(delta)) / (2 * a)<<endl<<endl; 
+        // cout <<"X1 = "(<<-b<<" + \u221A("<<delta<<"))"<<endl; 
+        // double root1 = (-b + calculateSquareRoot(delta)) / (2 * a);
+        // double root2 = (-b - calculateSquareRoot(delta)) / (2 * a);
+        // cout <<root1<<endl;
+        // cout <<root2<<endl;
     }
     else if (delta == 0)
     {
-        cout <<"Discriminant is null, the solution is: "<<endl;
-
-        double root = -b / (2 * a);
-        cout <<root<<endl;
+        cout <<"Discriminant is null, the solution is: "<<endl<<endl;
+        cout <<"X1 = "<<-b<<" / ("<<2 <<" * "<<a<<")"<<endl;
+        cout <<"X1 = "<<-b / (2 * a)<<endl;
+        // double root = -b / (2 * a);
+        // cout <<root<<endl;
         
     }
     else
     {
-        cout <<"Discriminant is strictly negative, the two Complex solutions are: "<<endl;
-        double realPart = -b / (2 * a);
-        double imagPart = calculateSquareRoot((delta * -1)) / (2 * a);
-        //cout <<"imagPart is "<<imagPart<<endl;
-         if (imagPart < 0)
-                imagPart *=-1;
-        if (realPart == 0)
-        {
-            // cout<<"HERE"<<endl;
-            std::cout <<"+" << (imagPart ) << " * i"<<endl;
-            std::cout <<"-"  << (imagPart)<< " * i" << std::endl;
-        }
-        else
-        {
-            // cout<<"NOT HERE"<<endl;
+        cout <<"Discriminant is strictly negative, the two Complex solutions are: "<<endl<<endl;
 
-            std::cout << realPart << " + " << (imagPart ) << " * i"<<endl;
-            std::cout << realPart <<  " - "  << (imagPart)<< " * i" << std::endl;
-        }
+        // cout <<"X1 = ("<<-b<<" + \u221A("<<delta<<")) / ("<<2 <<" * "<<a<<")"<<endl;
+        // cout <<"X1 = ("<<-b<<" + ("<<calculateSquareRoot(delta)<<")) / ("<<2 * a <<")"<<endl; 
+        // cout <<"X1 =  "<<(-b + calculateSquareRoot(delta)) / (2 * a)<<endl<<endl; 
+        
+
+        // cout <<"X2 = ("<<-b<<" - \u221A("<<delta<<")) / ("<<2 <<" * "<<a<<")"<<endl;
+        // cout <<"X2 = ("<<-b<<" - ("<<calculateSquareRoot(delta)<<")) / ("<<2 * a <<")"<<endl; 
+        // cout <<"X2 =  "<<(-b - calculateSquareRoot(delta)) / (2 * a)<<endl<<endl; 
+
+
+        // cout <<" ------------- "<<endl;
+        // cout <<"RealPart = "<<-b <<" / ( 2 * "<<a<<" )"<<endl;
+        // cout <<"RealPart = "<<-b / (2 * a)<<endl;
+        // cout <<"ImagPart = "<<-b <<" / ( 2 * "<<a<<" )"<<endl;
+
+        // double realPart = -b / (2 * a);
+        // double imagPart = calculateSquareRoot((delta * -1)) / (2 * a);
+        cout <<"X1 = "<<-b <<" / (2 * "<<a<<") + i\u221A("<<delta * -1<<") /( 2 * "<<a<<")"<<endl;
+        cout <<"X1 = "<<-b / (2 * a)<<" + i" << calculateSquareRoot((delta * -1))/( 2 * a)<<endl<<endl;
+
+        cout <<"X2 = "<<-b <<" / (2 * "<<a<<") - i\u221A("<<delta * -1<<") /( 2 * "<<a<<")"<<endl;
+        cout <<"X2 = "<<-b / (2 * a)<<" - i" << calculateSquareRoot((delta * -1))/( 2 * a)<<endl;
+        // if (imagPart < 0)
+        //         imagPart *=-1;
+        // if (realPart == 0)
+        // {
+        //     std::cout <<"+" << (imagPart ) << " * i"<<endl;
+        //     std::cout <<"-"  << (imagPart)<< " * i" << std::endl;
+        // }
+        // else
+        // {
+        //     std::cout << realPart << " + " << (imagPart ) << " * i"<<endl;
+        //     std::cout << realPart <<  " - "  << (imagPart)<< " * i" << std::endl;
+        // }
     }
 }
 
@@ -326,20 +353,20 @@ void equation_degrre1(vector<pair<double, string>> &leftAll)
     }
     if (b == 0)
     {
-        cout <<"\t\t\t"<<a<<" * X   = "<<b<<endl;
-        cout <<"\t\t\tX       = "<<b<<"/"<<a<<endl<<endl;
-        cout << "-----------------------------------------" << endl;
-        cout << "| Solution: X =                       |" << (b)/a <<"|"<<endl;
-        cout << "-----------------------------------------\n";
+        cout <<a<<" * X = "<<b<<endl;
+        cout <<"X = "<<b<<"/"<<a<<endl<<endl;
+        // cout << "---------------------------------------" << endl;
+        cout << "X = " << (b)/a <<endl;
+        // cout << "-----------------------------------------\n";
 
     }
     else
     {
-        cout <<"\t\t\t"<<a<<" * X   = "<<-b<<endl;
-        cout <<"\t\t\tX       = "<<-b<<"/"<<a<<endl<<endl;
-        cout << "-----------------------------------------" << endl;
-        cout << "| Solution: X =                    |" << (-b)/a <<"|"<<endl;
-        cout << "-----------------------------------------\n";
+        cout <<a<<" * X = "<<-b<<endl;
+        cout <<"X = "<<-b<<"/"<<a<<endl<<endl;
+        // cout << "-----------------------------------------" << endl;
+        cout <<"X = " << (-b)/a <<endl;
+        // cout << "-----------------------------------------\n";
     }
 }
 
