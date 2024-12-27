@@ -165,6 +165,8 @@ double get_number(string str)
             str[0]='+';
         else if (str[0] == '%')
             str[0] = '-';
+        if (str.find_first_of("X^") != std::string::npos)
+            ft_error(-2);
         double num = std::stod(str);
         if (num  > 2147483647 || num < -2147483648)
             ft_error(-4);
@@ -179,10 +181,17 @@ double get_number(string str)
 
 void get_expo(string str)
 { 
-    if (str.length() == 0 || (str.length() != 3 && str.length() != 1))
-        {
-            ft_error(-2);
-        }
+
+    if (str.length() == 0 || (str.length() != 3  && str.length() != 1))
+    {
+        ft_error(-2);
+    }
+    else if (str != "X^0" && str != "X^1" && str != "X^2" && str != "X^3" && str != "X" &&
+            str != "X^4" && str != "X^5" && str != "X^6" && str != "X^7" && 
+            str != "X^8" && str != "X^9")
+    {
+        ft_error(-2);
+    }
 }
 
 

@@ -131,3 +131,6 @@ DELTA =  -9.3 * 4 *6
 
 
 //beday python.
+
+//this case : ./computor "5 * X^0 + 3 * X^1 + 3 * 6 = 1 * X^0 + 0 * X^5"
+//this case : "5 * X^0 + 3 * X^1 + 3 * 2 = 1 * X^0 + 0 * X^5"

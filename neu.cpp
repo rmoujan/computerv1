@@ -285,9 +285,19 @@ void calcul_delta(vector<pair<double, string>> &leftAll)
         //cout <<"imagPart is "<<imagPart<<endl;
          if (imagPart < 0)
                 imagPart *=-1;
+        if (realPart == 0)
+        {
+            // cout<<"HERE"<<endl;
+            std::cout <<"+" << (imagPart ) << " * i"<<endl;
+            std::cout <<"-"  << (imagPart)<< " * i" << std::endl;
+        }
+        else
+        {
+            // cout<<"NOT HERE"<<endl;
+
             std::cout << realPart << " + " << (imagPart ) << " * i"<<endl;
-        // if (-imagPart < 0)
             std::cout << realPart <<  " - "  << (imagPart)<< " * i" << std::endl;
+        }
     }
 }
 
@@ -316,20 +326,21 @@ void equation_degrre1(vector<pair<double, string>> &leftAll)
     }
     if (b == 0)
     {
-        cout <<"\t\t\t\t"<<a<<" * X   = "<<b<<endl;
-        cout <<"\t\t\t\tX       = "<<b<<"/"<<a<<endl<<endl;
+        cout <<"\t\t\t"<<a<<" * X   = "<<b<<endl;
+        cout <<"\t\t\tX       = "<<b<<"/"<<a<<endl<<endl;
+        cout << "-----------------------------------------" << endl;
+        cout << "| Solution: X =                       |" << (b)/a <<"|"<<endl;
+        cout << "-----------------------------------------\n";
 
     }
     else
     {
         cout <<"\t\t\t"<<a<<" * X   = "<<-b<<endl;
-        cout <<"\t\t\tX = "<<-b<<"/"<<a<<endl<<endl;
-
+        cout <<"\t\t\tX       = "<<-b<<"/"<<a<<endl<<endl;
+        cout << "-----------------------------------------" << endl;
+        cout << "| Solution: X =                    |" << (-b)/a <<"|"<<endl;
+        cout << "-----------------------------------------\n";
     }
-    // cout <<"The solution is: "<<(-b)/a<<endl<<endl;
-    cout << "-----------------------------------------" << endl;
-    cout << "| Solution: X =                          |" << (-b)/a <<endl;
-    cout << "-----------------------------------------\n";
 }
 
 
